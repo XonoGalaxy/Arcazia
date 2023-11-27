@@ -70,12 +70,21 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PublicIncludeDirectories>C:\Program Files\boost\boost_1_82_0;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalHeaderUnitDependencies>
+      </AdditionalHeaderUnitDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <TranslateIncludes>false</TranslateIncludes>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Samuel\source\repos\Arcazia A\Arcazia A;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -90,6 +99,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalHeaderUnitDependencies>
+      </AdditionalHeaderUnitDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <TranslateIncludes>false</TranslateIncludes>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Samuel\source\repos\Arcazia A\Arcazia A;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,6 +119,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalModuleDependencies>
+      </AdditionalModuleDependencies>
+      <AdditionalHeaderUnitDependencies>
+      </AdditionalHeaderUnitDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <TranslateIncludes>false</TranslateIncludes>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Samuel\source\repos\Arcazia A\Arcazia A;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +141,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalHeaderUnitDependencies>
+      </AdditionalHeaderUnitDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <TranslateIncludes>false</TranslateIncludes>
+      <AdditionalModuleDependencies>
+      </AdditionalModuleDependencies>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Samuel\source\repos\Arcazia A\Arcazia A;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +186,7 @@
     <ClInclude Include="Stun.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="UnitBuilder.h" />
+    <ClInclude Include="UnitsConfig.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

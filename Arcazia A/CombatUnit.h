@@ -25,7 +25,7 @@ public:
 
     enum UnitState { ALIVE = 0, DEAD = 1 };
     enum UnitAffection { NONE = 0, STUNNED = 1, POISONED = 2 };
-    enum UnitType { KNIGHT = 0, ORC = 2 };
+    enum UnitType { KNIGHT = 0, ORC = 1 };
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor

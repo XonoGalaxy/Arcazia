@@ -11,29 +11,92 @@
  **/
 
 #include "BuildManager.h"
+#include "UnitsConfig.h"
 
 BuildManager::BuildManager()
 {
+    //Extract hardcoded units from UnitsConfig.h file
+    m_units = UNITS_CONFIG;
 }
 
 BuildManager::~BuildManager()
 {
 }
 
-void BuildManager::constructKnight(UnitBuilder* builder_, int config_)
+int BuildManager::getNumber()
 {
-    builder_->reset();
-    builder_->setLifePoint(config_);
-    builder_->setShieldPoint(config_);
-    //builder_.setSkills();
-    //builder_.setWeapon();
+    return m_nb;
 }
 
-void BuildManager::constructOrc(UnitBuilder* builder_, int config_)
+void BuildManager::setNumber(int nb_)
+{
+    m_nb = nb_;
+}
+
+void BuildManager::setUnitConfig(UnitConfig config_)
+{
+    m_units.push_back(config_);
+}
+
+std::vector<BuildManager::UnitConfig> BuildManager::getUnitsConfig()
+{
+    return m_units;
+}
+
+void BuildManager::constructKnight(UnitBuilder* builder_, UnitConfig config_)
 {
     builder_->reset();
-    builder_->setLifePoint(config_);
-    builder_->setShieldPoint(config_);
-    //builder_.setSkills(config_);
-    //builder_.setWeapon(config_);
+    builder_->setLifePoint(config_.life);
+    builder_->setShieldPoint(config_.shield);
+
+    switch (config_.skill) {
+
+    case Skills::SkillType::STUN:
+        builder_->setSkills(Stun());
+        break;
+
+    case Skills::SkillType::CHARGE:
+        builder_->setSkills(Charge());
+        break;
+    }
+
+    switch (config_.weapon) {
+
+    case Weapon::WeaponType::AXE:
+        builder_->setWeapon(Axe());
+        break;
+
+     case Weapon::WeaponType::SWORD:
+        builder_->setWeapon(Sword());
+        break;
+    }
+}
+
+void BuildManager::constructOrc(UnitBuilder* builder_, UnitConfig config_)
+{
+    builder_->reset();
+    builder_->setLifePoint(config_.life);
+    builder_->setShieldPoint(config_.shield);
+
+    switch (config_.skill) {
+
+    case Skills::SkillType::STUN:
+        builder_->setSkills(Stun());
+        break;
+
+    case Skills::SkillType::CHARGE:
+        builder_->setSkills(Charge());
+        break;
+    }
+
+    switch (config_.weapon) {
+
+    case Weapon::WeaponType::AXE:
+        builder_->setWeapon(Axe());
+        break;
+
+    case Weapon::WeaponType::SWORD:
+        builder_->setWeapon(Sword());
+        break;
+    }
 }

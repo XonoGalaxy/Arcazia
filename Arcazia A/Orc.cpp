@@ -14,6 +14,7 @@
 
 Orc::Orc() : CombatUnit(60, 0, UnitState::ALIVE)
 {
+    m_type = ORC;
 }
 
 Orc::~Orc()

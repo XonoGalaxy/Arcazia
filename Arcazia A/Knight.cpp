@@ -14,6 +14,7 @@
 
 Knight::Knight() : CombatUnit(20, 60, UnitState::ALIVE)
 {
+    m_type = KNIGHT;
 }
 
 Knight::~Knight()

@@ -12,6 +12,10 @@
  **/
 
 #include "UnitBuilder.h"
+#include "Stun.h"
+#include "Charge.h"
+#include "Sword.h"
+#include "Axe.h"
 
 class BuildManager
 {
@@ -19,6 +23,16 @@ public:
     /****************************************************************************/
     /** \name       Types aliases
     **/ /** @{ ******************************************************************/
+
+    struct UnitConfig {
+        int id;
+        CombatUnit::UnitType type;
+        int life;
+        int shield;
+        Skills::SkillType skill;
+        Weapon::WeaponType weapon;
+    };
+
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
@@ -53,16 +67,27 @@ public:
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
 
+    int             getNumber();
+
+    void            setNumber(int nb_);
+
+    void            setUnitConfig(UnitConfig config_);
+
+    std::vector<UnitConfig>  getUnitsConfig();
+
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
     **/ /** @{ ******************************************************************/
 
-    /// \brief      Knight build method depending on configuration
-    void            constructKnight(UnitBuilder* builder_, int config_);
+    /// \brief      Knight build method
+    void            constructKnight(UnitBuilder* builder_, UnitConfig config_);
 
-    /// \brief      Orc build method depending on configuration
-    void            constructOrc(UnitBuilder* builder_, int config_);
+    /// \brief      Orc build method
+    void            constructOrc(UnitBuilder* builder_, UnitConfig config_);
+
+    /// \brief      Make units depending on configuration file
+    //void          makeUnits(UnitsExtractor* extractor_);
 
 
 protected:
@@ -87,8 +112,11 @@ private:
     /** \name       Private Data members
     **/ /** @{ ******************************************************************/
 
-    /// \brief      Builder configurations
-    int             configuration;
+    /// \brief      Available units
+    int             m_nb;
+
+    /// \brief          Units configuration
+    std::vector<UnitConfig>   m_units;
 
     /** @} **/
 };

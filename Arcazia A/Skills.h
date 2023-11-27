@@ -21,6 +21,7 @@ public:
     **/ /** @{ ******************************************************************/
 
     enum SkillState { READY = 0, LOADING = 1 };
+    enum SkillType { STUN = 0, CHARGE = 1 };
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
@@ -78,6 +79,9 @@ protected:
 
     /// \brief      Skill state
     SkillState      m_state;
+
+    /// \brief      Skill type
+    SkillType       m_type;
 
 
 private:
