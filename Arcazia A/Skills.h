@@ -37,7 +37,7 @@ public:
     //Skills(Skills&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    Skills(int success_, int loading_, SkillState state_);
+    Skills(int success_, int loading_, SkillState state_, int turns_, SkillType type_);
 
     /// \brief      Destructor
     ~Skills();
@@ -56,6 +56,9 @@ public:
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
 
+    SkillState      getState();
+
+    SkillType      getType();
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
@@ -74,14 +77,20 @@ protected:
     /// \brief      Skill success rate
     int             m_success;
 
-    /// \brief      Skill loading time
-    int             m_loading;
+    /// \brief      Number of turns skills need to for reload
+    int             m_load;
+
+    /// \brief      Number of turns before reload
+    int             m_count;
 
     /// \brief      Skill state
     SkillState      m_state;
 
     /// \brief      Skill type
     SkillType       m_type;
+
+    /// \brief      Number of turns skills take effect
+    int             m_turns;
 
 
 private:

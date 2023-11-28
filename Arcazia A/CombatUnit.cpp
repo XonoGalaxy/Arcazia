@@ -99,3 +99,17 @@ void CombatUnit::setAffection(UnitAffection affection_)
 {
     m_affections.push_back(affection_);
 }
+
+void CombatUnit::launchSkill()
+{
+    switch (m_skills[0].getType()) {
+
+    case Skills::SkillType::CHARGE:
+        
+        break;
+
+    case Skills::SkillType::STUN:
+
+        break;
+    }
+}

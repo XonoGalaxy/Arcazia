@@ -16,15 +16,15 @@
 #include "OrcBuilder.h"
 
 int main() {
-    std::cout << "WELCOME TO ARCAZIA\n";
+    std::cout << "WELCOME TO ARCAZIA : Alpha version\n";
 
-    std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | INFO : Configuration\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Configuration\n";
 
     BuildManager* bm = new BuildManager();
     KnightBuilder* kb = new KnightBuilder();
     OrcBuilder* ob = new OrcBuilder();
 
-    std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | INFO : Construction\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Construction\n";
     for (auto &unit : bm->getUnitsConfig()) {
 
         switch (unit.type) {
@@ -41,17 +41,31 @@ int main() {
         }
     }
 
+    // Faire un vecteur d'unité construit et prêt pour le combat
+    // CombatProtocol1v1 combat01;
+    // combat01->m_opponent01 = kb->getKnight();
+    // combat01->m_opponent02 = ob->getKnight();
     Knight* unit01 = kb->getKnight();
     Orc* unit02 = ob->getOrc();
 
-    std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | DEBUG : Unit 01 type : " << unit01->getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | DEBUG : Unit 01 life point : " << unit01->getLife() << "\n";
+    // Afficher un tableau de statistique pour chaque unité de combat prêt
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[0].id << " type : " << unit01->getType() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[0].id << " life point : " << unit01->getLife() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[1].id << " type : " << unit02->getType() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[1].id << " weapon type : " << unit02->getWeapon().getType() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[1].id << " weapon damage : " << unit02->getWeapon().getDamage() << "\n";
 
-    std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | DEBUG : Unit 02 type : " << unit02->getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | DEBUG : Unit 02 weapon type : " << unit02->getWeapon().getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | DEBUG : Unit 02 weapon damage : " << unit02->getWeapon().getDamage() << "\n";
+    // Le joueur lance un combat en choisissant 2 unités de combat
+    std::cout << "LOG : GAME INTERFACE | INFO : Would you like to start a combat ? \n";
+    std::cout << "LOG : GAME INTERFACE | INFO : Choose 2 combat units \n";
 
-    std::cout << "LOG : GAME MOTOR | INTERFACE SYSTEM | INFO : Choose 2 combat units \n";
+    // Lancement du système de combat
+    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat initialization \n";
+    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat configuration \n";
+    std::cout << "LOG : GAME INTERFACE | INFO : Combat starts \n";
+
+    // Display combat information to player
+
 
     //std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | INFO : System initialization\n";
     //std::cout << "LOG : GAME MOTOR | COMBAT UNIT SYSTEM | INFO : Configuration loading\n";

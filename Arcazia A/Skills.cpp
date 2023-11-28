@@ -16,10 +16,20 @@ Skills::Skills()
 {
 }
 
-Skills::Skills(int success_, int loading_, SkillState state_)
+Skills::Skills(int success_, int loading_, SkillState state_, int turns_, Skills::SkillType type_)
 {
 }
 
 Skills::~Skills()
 {
+}
+
+Skills::SkillState Skills::getState()
+{
+    return m_state;
+}
+
+Skills::SkillType Skills::getType()
+{
+    return m_type;
 }

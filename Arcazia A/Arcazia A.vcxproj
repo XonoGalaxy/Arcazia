@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -162,6 +162,8 @@
     <ClCompile Include="Axe.cpp" />
     <ClCompile Include="BuildManager.cpp" />
     <ClCompile Include="Charge.cpp" />
+    <ClCompile Include="CombatManager.cpp" />
+    <ClCompile Include="CombatProtocol1v1.cpp" />
     <ClCompile Include="CombatUnit.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="KnightBuilder.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="Axe.h" />
     <ClInclude Include="BuildManager.h" />
     <ClInclude Include="Charge.h" />
+    <ClInclude Include="CombatManager.h" />
+    <ClInclude Include="CombatProtocol1v1.h" />
     <ClInclude Include="CombatUnit.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="KnightBuilder.h" />

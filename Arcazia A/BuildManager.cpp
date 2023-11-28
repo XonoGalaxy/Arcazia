@@ -17,6 +17,9 @@ BuildManager::BuildManager()
 {
     //Extract hardcoded units from UnitsConfig.h file
     m_units = UNITS_CONFIG;
+    m_nb = AVAILABLE_UNITS;
+
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : " << AVAILABLE_UNITS << " available units \n";
 }
 
 BuildManager::~BuildManager()

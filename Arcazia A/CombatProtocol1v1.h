@@ -1,8 +1,8 @@
 #pragma once
 /**
 
-    \file       CombatUnit.h
-    \brief      Declaration of CombatUnit class
+    \file       CombatProtocol1v1.h
+    \brief      Declaration of CombatProtocol1v1 class
     \copyright  © Copyright XONO GALAXY - 2023 - All rights reserved
 
     Reproduction, modification and/or use of this document without express written permission of XONO GALAXY is prohibited
@@ -11,124 +11,70 @@
 
  **/
 
-#include <vector>
+#include "CombatUnit.h"
+#include "CombatManager.h"
 
-#include "Weapon.h"
-#include "Skills.h"
-
-class CombatUnit
+class CombatProtocol1v1 : 
+    public CombatManager
 {
 public:
     /****************************************************************************/
     /** \name       Types aliases
     **/ /** @{ ******************************************************************/
 
-    enum UnitState { ALIVE = 0, DEAD = 1 };
-    enum UnitAffection { NONE = 0, STUNNED = 1, POISONED = 2 };
-    enum UnitType { KNIGHT = 0, ORC = 1 };
-
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
     **/ /** @{ ******************************************************************/
 
     /// \brief      Default constructor
-    CombatUnit();
+    CombatProtocol1v1();
 
     /// \brief      Copy constructor
-    //CombatUnit(const CombatUnit& rhs_) = delete;
+    //CombatProtocol1v1(const CombatProtocol1v1& rhs_) = delete;
 
     /// \brief      Move constructor
-    //CombatUnit(CombatUnit&& rhs_) = delete;
+    //CombatProtocol1v1(CombatProtocol1v1&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    CombatUnit(int m_life, int m_shield, UnitState m_state);
+    //CombatProtocol1v1();
 
     /// \brief      Destructor
-    ~CombatUnit();
+    ~CombatProtocol1v1();
 
     /** @}*/ /*******************************************************************/
     /** \name       Operators
     **/ /** @{ ******************************************************************/
 
     /// \brief      Copy operator, use default implementation
-    //CombatUnit& operator=(const CombatUnit& rhs_) = delete;
+    //CombatProtocol1v1& operator=(const CombatProtocol1v1& rhs_) = delete;
 
     /// \brief      Move operator, use default implementation
-    //CombatUnit& operator=(CombatUnit&& rhs_) = delete;
+    //CombatProtocol1v1& operator=(CombatProtocol1v1&& rhs_) = delete;
 
     /** @}*/ /*******************************************************************/
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
-
-    /// \brief      Getter : m_life
-    int             getLife() const;
-
-    int             getShield() const;
-
-    Weapon          getWeapon() const;
-
-    UnitState       getState() const;
-
-    UnitType        getType() const;
-
-    std::vector<Skills>         getSkills() const;
-
-    std::vector<UnitAffection>  getAffection() const;
-
-
-    /// \brief      Setter : m_life
-    void            setLife(int life_);
-
-    void            setShield(int shield_);
-
-    void            setWeapon(Weapon weapon_);
-
-    void            setState(UnitState state_);
-
-    void            setType(UnitType type_);
-
-    void            setSkills(Skills skill_);
-
-    void            setAffection(UnitAffection affection_);
-
-    void            launchSkill();
 
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
     **/ /** @{ ******************************************************************/
 
+    void                launchCombatProtocol1v1();
+
+
 protected:
     /** @}*/ /*******************************************************************/
     /** \name       Protected Methods, Functions
     **/ /** @{ ******************************************************************/
 
+    /// \brief      Reset builder instance
 
 
     /** @}*/ /*******************************************************************/
     /** \name       Protected Data members
     **/ /** @{ ******************************************************************/
 
-    /// \brief      Life point
-    int             m_life;
-
-    /// \brief      Shield point
-    int             m_shield;
-
-    /// \brief      Weapon
-    Weapon          m_weapon;
-
-    /// \brief      Combat unit state
-    UnitState       m_state;
-
-    /// \brief      Combat unit type
-    UnitType        m_type;
-
-    /// \brief                  Combat unit skills
-    std::vector<Skills>         m_skills;
-
-    /// \brief                  Combat unit affection
-    std::vector<UnitAffection>  m_affections;
 
 private:
     /** @}*/ /*******************************************************************/
@@ -137,7 +83,7 @@ private:
 
 
     /** @}*/ /*******************************************************************/
-    /** \name       Private Data members
+    /** \name       Private Data memberss
     **/ /** @{ ******************************************************************/
 
     /** @} **/
