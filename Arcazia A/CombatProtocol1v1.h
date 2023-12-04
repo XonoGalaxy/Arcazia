@@ -12,10 +12,9 @@
  **/
 
 #include "CombatUnit.h"
-#include "CombatManager.h"
+#include "ActionHandler.h"
 
-class CombatProtocol1v1 : 
-    public CombatManager
+class CombatProtocol1v1
 {
 public:
     /****************************************************************************/
@@ -55,6 +54,14 @@ public:
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
 
+    CombatUnit*         getOpponent1();
+
+    CombatUnit*         getOpponent2();
+
+    void                setOpponent1(CombatUnit* opponent_);
+
+    void                setOpponent2(CombatUnit* opponent_);
+
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
@@ -67,8 +74,6 @@ protected:
     /** @}*/ /*******************************************************************/
     /** \name       Protected Methods, Functions
     **/ /** @{ ******************************************************************/
-
-    /// \brief      Reset builder instance
 
 
     /** @}*/ /*******************************************************************/
@@ -85,6 +90,18 @@ private:
     /** @}*/ /*******************************************************************/
     /** \name       Private Data memberss
     **/ /** @{ ******************************************************************/
+
+    /// \brief      Number of turns made by the protocol
+    int             m_turns;
+
+    /// \brief      First oppoenent of 1v1 combat protocol 
+    CombatUnit*     m_opponent1;
+
+    /// \brief      Second oppenent of 1v1 combat protocol 
+    CombatUnit*     m_opponent2;
+
+    /// \brief      Second oppenent of 1v1 combat protocol
+    ActionHandler*  m_actionHandler;
 
     /** @} **/
 };

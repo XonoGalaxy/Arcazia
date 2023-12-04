@@ -12,6 +12,7 @@
  **/
 
 #include <vector>
+#include <iostream>
 
 #include "Weapon.h"
 #include "Skills.h"
@@ -71,9 +72,11 @@ public:
 
     UnitType        getType() const;
 
-    std::vector<Skills>         getSkills() const;
+    std::vector<Skills>                         getSkills() const;
 
-    std::vector<UnitAffection>  getAffection() const;
+    std::vector<std::pair<int, UnitAffection>>  getAffection() const;
+
+    int             getId() const;
 
 
     /// \brief      Setter : m_life
@@ -89,9 +92,9 @@ public:
 
     void            setSkills(Skills skill_);
 
-    void            setAffection(UnitAffection affection_);
+    void            setAffection(std::pair<int,UnitAffection> affection_);
 
-    void            launchSkill();
+    void            setId(int id_);
 
 
     /** @}*/ /*******************************************************************/
@@ -103,11 +106,12 @@ protected:
     /** \name       Protected Methods, Functions
     **/ /** @{ ******************************************************************/
 
-
-
     /** @}*/ /*******************************************************************/
     /** \name       Protected Data members
     **/ /** @{ ******************************************************************/
+
+    /// \brief      Unit identification umber
+    int             m_id;
 
     /// \brief      Life point
     int             m_life;
@@ -124,11 +128,11 @@ protected:
     /// \brief      Combat unit type
     UnitType        m_type;
 
-    /// \brief                  Combat unit skills
-    std::vector<Skills>         m_skills;
+    /// \brief                                  Combat unit skills
+    std::vector<Skills>                         m_skills;
 
-    /// \brief                  Combat unit affection
-    std::vector<UnitAffection>  m_affections;
+    /// \brief                                  Combat unit affection associeted with time effect
+    std::vector<std::pair<int,UnitAffection>>   m_affections;
 
 private:
     /** @}*/ /*******************************************************************/

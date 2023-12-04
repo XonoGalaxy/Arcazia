@@ -46,10 +46,10 @@ public:
     **/ /** @{ ******************************************************************/
 
     /// \brief      Copy operator, use default implementation
-    Knight& operator=(const Knight& rhs_) = delete;
+    //Knight& operator=(const Knight& rhs_) = delete;
 
     /// \brief      Move operator, use default implementation
-    Knight& operator=(Knight&& rhs_) = delete;
+    //Knight& operator=(Knight&& rhs_) = delete;
 
     /** @}*/ /*******************************************************************/
     /** \name       Getters, Setters

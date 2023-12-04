@@ -1,5 +1,4 @@
 #pragma once
-
 /**
 
     \file       Skills.h
@@ -11,7 +10,6 @@
     All rights reserved - XONO GALAXY Proprietary Data.
 
  **/
-
 
 class Skills
 {
@@ -58,7 +56,27 @@ public:
 
     SkillState      getState();
 
-    SkillType      getType();
+    SkillType       getType();
+
+    int             getCount();
+
+    int             getLoad();
+
+    int             getSuccess();
+
+    int             getTurns();
+
+    void            setState(SkillState state_);
+
+    void            setType(SkillType type_);
+
+    void            setCount(int count_);
+
+    void            setLoad(int load_);
+
+    void            setSuccess(int success_);
+
+    void            setTurns(int turns_);
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
@@ -69,10 +87,12 @@ protected:
     /** \name       Protected Methods, Functions
     **/ /** @{ ******************************************************************/
 
-
     /** @}*/ /*******************************************************************/
     /** \name       Protected Data members
     **/ /** @{ ******************************************************************/
+
+    /// \brief      Skill type
+    SkillType       m_type;
 
     /// \brief      Skill success rate
     int             m_success;
@@ -85,9 +105,6 @@ protected:
 
     /// \brief      Skill state
     SkillState      m_state;
-
-    /// \brief      Skill type
-    SkillType       m_type;
 
     /// \brief      Number of turns skills take effect
     int             m_turns;

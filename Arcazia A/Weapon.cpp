@@ -40,6 +40,11 @@ Weapon::WeaponType Weapon::getType() const
     return m_type;
 }
 
+std::vector<std::pair<int, Weapon::WeaponBuff>> Weapon::getBuffs() const
+{
+    return m_buffs;
+}
+
 /**
     Set weapon damage
 
@@ -53,4 +58,10 @@ void Weapon::setDamage(int damage_)
 void Weapon::setType(WeaponType type_)
 {
     m_type = type_;
+}
+
+void Weapon::setBuff(std::pair<int, WeaponBuff> buff_)
+{
+    // Adding a pair to the vector
+    m_buffs.push_back(buff_);
 }

@@ -46,6 +46,11 @@ void KnightBuilder::setShieldPoint(int shield_)
 	m_knight->setShield(shield_);
 }
 
+void KnightBuilder::setId(int id_)
+{
+	m_knight->setId(id_);
+}
+
 Knight* KnightBuilder::getKnight()
 {
 	return m_knight;

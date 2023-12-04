@@ -11,7 +11,10 @@
 
  **/
 
+#include <map>
+
 #include "Skills.h"
+
 
 class Stun :
     public Skills

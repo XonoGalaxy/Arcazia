@@ -49,6 +49,7 @@ std::vector<BuildManager::UnitConfig> BuildManager::getUnitsConfig()
 void BuildManager::constructKnight(UnitBuilder* builder_, UnitConfig config_)
 {
     builder_->reset();
+    builder_->setId(config_.id);
     builder_->setLifePoint(config_.life);
     builder_->setShieldPoint(config_.shield);
 
@@ -78,6 +79,7 @@ void BuildManager::constructKnight(UnitBuilder* builder_, UnitConfig config_)
 void BuildManager::constructOrc(UnitBuilder* builder_, UnitConfig config_)
 {
     builder_->reset();
+    builder_->setId(config_.id);
     builder_->setLifePoint(config_.life);
     builder_->setShieldPoint(config_.shield);
 

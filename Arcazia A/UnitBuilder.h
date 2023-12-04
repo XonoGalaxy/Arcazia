@@ -75,6 +75,9 @@ public:
     /// \brief      Set unit shield point
     virtual void    setShieldPoint(int shield_);
 
+    /// \brief      Set unit id
+    virtual void    setId(int id_);
+
 protected:
     /** @}*/ /*******************************************************************/
     /** \name       Protected Methods, Functions

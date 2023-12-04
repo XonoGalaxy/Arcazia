@@ -82,6 +82,9 @@ protected:
     /// \brief      Set unit shield point
     void            setShieldPoint(int shield_);
 
+    /// \brief      Set unit id 
+    void            setId(int id_);
+
 
     /** @}*/ /*******************************************************************/
     /** \name       Protected Data members

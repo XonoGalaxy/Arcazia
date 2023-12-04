@@ -39,3 +39,7 @@ void UnitBuilder::setLifePoint(int life_)
 void UnitBuilder::setShieldPoint(int shield_)
 {
 }
+
+void UnitBuilder::setId(int id_)
+{
+}

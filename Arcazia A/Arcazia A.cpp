@@ -42,22 +42,41 @@ int main() {
     }
 
     // Faire un vecteur d'unité construit et prêt pour le combat
-    // CombatProtocol1v1 combat01;
-    // combat01->m_opponent01 = kb->getKnight();
-    // combat01->m_opponent02 = ob->getKnight();
     Knight* unit01 = kb->getKnight();
     Orc* unit02 = ob->getOrc();
 
     // Afficher un tableau de statistique pour chaque unité de combat prêt
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[0].id << " type : " << unit01->getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[0].id << " life point : " << unit01->getLife() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[1].id << " type : " << unit02->getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[1].id << " weapon type : " << unit02->getWeapon().getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << bm->getUnitsConfig()[1].id << " weapon damage : " << unit02->getWeapon().getDamage() << "\n";
+    // Faire une fonction qui montre les stats des unités de combat sous forme de tableau
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit01->getId() << " type : " << unit01->getType() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit01->getId() << " life point : " << unit01->getLife() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " type : " << unit02->getType() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " weapon type : " << unit02->getWeapon().getType() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " weapon damage : " << unit02->getWeapon().getDamage() << "\n";
 
-    // Le joueur lance un combat en choisissant 2 unités de combat
-    std::cout << "LOG : GAME INTERFACE | INFO : Would you like to start a combat ? \n";
+    // Combat system initialization
+    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM |INFO : Initialization\n";
+    // Client code of the commands pattern, here
+    // Create receivers : ActionHandler
+    // Create action commands and associate with them with receivers 
+    // Create senders, and associate them with specific commands
+
+
+
+    //std::cout << "LOG : GAME INTERFACE | INFO : Choose a combat protocol \n";
+    // Combat protocol choice
+
     std::cout << "LOG : GAME INTERFACE | INFO : Choose 2 combat units \n";
+    // Combat unit choice
+    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM |INFO : Initialization\n";
+
+    std::cout << "LOG : GAME INTERFACE | INFO : [0,1] ?\n";
+
+    // CombatProtocol1v1 combat01;
+    // combat01->m_opponent01 = kb->getKnight();
+    // combat01->m_opponent02 = ob->getKnight();
+
+    std::cout << "LOG : GAME INTERFACE | INFO : Would you like to start a combat ? [Y,N]\n";
+    // Launch combat
 
     // Lancement du système de combat
     std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat initialization \n";

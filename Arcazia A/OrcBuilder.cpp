@@ -46,6 +46,11 @@ void OrcBuilder::setShieldPoint(int shield_)
 	m_orc->setShield(shield_);
 }
 
+void OrcBuilder::setId(int id_)
+{
+	m_orc->setId(id_);
+}
+
 Orc* OrcBuilder::getOrc()
 {
 	return m_orc;

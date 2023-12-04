@@ -1,8 +1,8 @@
 #pragma once
 /**
 
-    \file       CombatManager.h
-    \brief      Declaration of CombatManager class
+    \file       ActionHandler.h
+    \brief      Declaration of ActionHandler class
     \copyright  © Copyright XONO GALAXY - 2023 - All rights reserved
 
     Reproduction, modification and/or use of this document without express written permission of XONO GALAXY is prohibited
@@ -11,9 +11,10 @@
 
  **/
 
+#include "Skills.h"
 #include "CombatUnit.h"
 
-class CombatManager
+class ActionHandler
 {
 public:
     /****************************************************************************/
@@ -22,74 +23,80 @@ public:
 
     enum CombatAction { NO = 0, YES = 1 };
 
+    enum UnitTurn { STARTED = 0, ENDED = 1};
+
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
     **/ /** @{ ******************************************************************/
 
     /// \brief      Default constructor
-    CombatManager();
+    ActionHandler();
 
     /// \brief      Copy constructor
-    //CombatManager(const CombatManager& rhs_) = delete;
+    //ActionHandler(const ActionHandler& rhs_) = delete;
 
     /// \brief      Move constructor
-    //CombatManager(CombatManager&& rhs_) = delete;
+    //ActionHandler(ActionHandler&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    //CombatManager();
+    //ActionHandler();
 
     /// \brief      Destructor
-    ~CombatManager();
+    ~ActionHandler();
 
     /** @}*/ /*******************************************************************/
     /** \name       Operators
     **/ /** @{ ******************************************************************/
 
     /// \brief      Copy operator, use default implementation
-    //CombatManager& operator=(const CombatManager& rhs_) = delete;
+    //ActionHandler& operator=(const ActionHandler& rhs_) = delete;
 
     /// \brief      Move operator, use default implementation
-    //CombatManager& operator=(CombatManager&& rhs_) = delete;
+    //ActionHandler& operator=(ActionHandler&& rhs_) = delete;
 
     /** @}*/ /*******************************************************************/
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
 
-    CombatUnit*         getOpponent1();
-
-    CombatUnit*         getOpponent2();
-
-    void                setOpponent1(CombatUnit* opponent_);
-
-    void                setOpponent2(CombatUnit* opponent_);
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
     **/ /** @{ ******************************************************************/
 
-    CombatAction        checkSkillAction(Skills skill_);
+    /// \brief          Check if skill action is possible
+    CombatAction        checkSkillAction(CombatUnit* unit_);
 
+    /// \brief          Check if basic attack action is possible
     CombatAction        checkBasicAttackAction(CombatUnit* unit_);
 
+    /// \brief                           Update units state
+    CombatUnit::UnitState                checkUnitState(CombatUnit* unit_);
+
+    /// \brief          Update units state
+    void                updateUnitsState(std::vector<CombatUnit*> units_);
+
+    /// \brief          Update units affections effect turns
+    void                updateAffections(std::vector<CombatUnit*> units_);
+
+    /// \brief          Update units skills 
+    void                updateSkills(std::vector<CombatUnit*> units_);
+
+    /// \brief          Launcher unit applies skill on receiver unit
+    void                applySkill(CombatUnit* launcher_, CombatUnit* receiver_);
+
+    /// \brief          Launcher unit applies basic attack on receiver unit 
+    void                applyBasicAttack(CombatUnit* launcher_, CombatUnit* receiver_);
 
 protected:
     /** @}*/ /*******************************************************************/
     /** \name       Protected Methods, Functions
-    **/ /** @{ ******************************************************************/               
+    **/ /** @{ ******************************************************************/
 
 
     /** @}*/ /*******************************************************************/
     /** \name       Protected Data members
     **/ /** @{ ******************************************************************/
 
-    /// \brief      Number of turns made by the protocol
-    int             m_turns;
-
-    /// \brief      First oppoenent of 1v1 combat protocol 
-    CombatUnit*     m_opponent1;
-
-    /// \brief      Second oppenent of 1v1 combat protocol 
-    CombatUnit*     m_opponent2;
 
 
 private:
