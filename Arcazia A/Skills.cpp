@@ -16,7 +16,7 @@ Skills::Skills()
 {
 }
 
-Skills::Skills(int success_, int loading_, SkillState state_, int turns_, Skills::SkillType type_)
+Skills::Skills(double success_, int loading_, SkillState state_, int turns_, Skills::SkillType type_)
 {
     m_success   = success_;
     m_load      = loading_;
@@ -49,7 +49,7 @@ int Skills::getLoad()
     return m_load;
 }
 
-int Skills::getSuccess()
+double Skills::getSuccess()
 {
     return m_success;
 }
@@ -79,7 +79,7 @@ void Skills::setLoad(int load_)
     m_load = load_;
 }
 
-void Skills::setSuccess(int success_)
+void Skills::setSuccess(double success_)
 {
     m_success = success_;
 }

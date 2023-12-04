@@ -10,9 +10,11 @@
     All rights reserved - XONO GALAXY Proprietary Data.
 
  **/
+#include <random>
 
 #include "Skills.h"
 #include "CombatUnit.h"
+
 
 class ActionHandler
 {
@@ -22,8 +24,7 @@ public:
     **/ /** @{ ******************************************************************/
 
     enum CombatAction { NO = 0, YES = 1 };
-
-    enum UnitTurn { STARTED = 0, ENDED = 1};
+    enum SkillAction { LAUNCHED = 0, FAILED = 1 };
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
@@ -69,8 +70,8 @@ public:
     /// \brief          Check if basic attack action is possible
     CombatAction        checkBasicAttackAction(CombatUnit* unit_);
 
-    /// \brief                           Update units state
-    CombatUnit::UnitState                checkUnitState(CombatUnit* unit_);
+    /// \brief                           Check units state
+    CombatUnit::UnitState                checkUnitsDeath(std::vector<CombatUnit*> units_);
 
     /// \brief          Update units state
     void                updateUnitsState(std::vector<CombatUnit*> units_);
@@ -80,6 +81,9 @@ public:
 
     /// \brief          Update units skills 
     void                updateSkills(std::vector<CombatUnit*> units_);
+
+    /// \brief          Unit launch a skill
+    SkillAction         launchSkill(CombatUnit* unit_);
 
     /// \brief          Launcher unit applies skill on receiver unit
     void                applySkill(CombatUnit* launcher_, CombatUnit* receiver_);

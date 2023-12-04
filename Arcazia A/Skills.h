@@ -35,7 +35,7 @@ public:
     //Skills(Skills&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    Skills(int success_, int loading_, SkillState state_, int turns_, SkillType type_);
+    Skills(double success_, int loading_, SkillState state_, int turns_, SkillType type_);
 
     /// \brief      Destructor
     ~Skills();
@@ -62,7 +62,7 @@ public:
 
     int             getLoad();
 
-    int             getSuccess();
+    double          getSuccess();
 
     int             getTurns();
 
@@ -74,7 +74,7 @@ public:
 
     void            setLoad(int load_);
 
-    void            setSuccess(int success_);
+    void            setSuccess(double success_);
 
     void            setTurns(int turns_);
 
@@ -95,7 +95,7 @@ protected:
     SkillType       m_type;
 
     /// \brief      Skill success rate
-    int             m_success;
+    double          m_success;
 
     /// \brief      Number of turns skills need to for reload
     int             m_load;

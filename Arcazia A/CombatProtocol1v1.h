@@ -21,6 +21,8 @@ public:
     /** \name       Types aliases
     **/ /** @{ ******************************************************************/
 
+    enum CombatState { STARTED = 0, ENDED = 1 };
+
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
     **/ /** @{ ******************************************************************/
@@ -54,13 +56,9 @@ public:
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
 
-    CombatUnit*         getOpponent1();
+    std::vector<CombatUnit*>        getOpponents();
 
-    CombatUnit*         getOpponent2();
-
-    void                setOpponent1(CombatUnit* opponent_);
-
-    void                setOpponent2(CombatUnit* opponent_);
+    void                setOpponent(CombatUnit* opponent_);
 
 
     /** @}*/ /*******************************************************************/
@@ -94,14 +92,15 @@ private:
     /// \brief      Number of turns made by the protocol
     int             m_turns;
 
-    /// \brief      First oppoenent of 1v1 combat protocol 
-    CombatUnit*     m_opponent1;
-
-    /// \brief      Second oppenent of 1v1 combat protocol 
-    CombatUnit*     m_opponent2;
+    /// \brief               Opponent
+    std::vector<CombatUnit*> m_opponents;
 
     /// \brief      Second oppenent of 1v1 combat protocol
     ActionHandler*  m_actionHandler;
+
+    /// \brief      Combat protocol state
+    CombatState     m_state;
+
 
     /** @} **/
 };

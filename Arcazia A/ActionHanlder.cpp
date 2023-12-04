@@ -28,16 +28,20 @@ ActionHandler::CombatAction ActionHandler::checkSkillAction(CombatUnit* unit_)
 
             if (affection.second == CombatUnit::UnitAffection::STUNNED) {
 
+                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is stunned and can't launch a skill\n";
                 return ActionHandler::CombatAction::NO;
+            
             }
             else {
 
+                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is able to launch a skill\n";
                 return ActionHandler::CombatAction::YES;
+             
             }
         }
     }
     else {
-        return CombatAction::NO;
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " skill : " << unit_->getSkills().at(0).getType() << " is " << unit_->getSkills().at(0).getState() << "(0:READY/1:LOADING)\n";
     }
 }
 
@@ -47,18 +51,34 @@ ActionHandler::CombatAction ActionHandler::checkBasicAttackAction(CombatUnit* un
 
         if (affection.second == CombatUnit::UnitAffection::STUNNED) {
 
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is stunned and can't launch a basic attack\n";
             return ActionHandler::CombatAction::NO;
+           
         }
         else {
 
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is able to launch a basic attack\n";
             return ActionHandler::CombatAction::YES;
         }
     }
 }
 
-CombatUnit::UnitState ActionHandler::checkUnitState(CombatUnit* unit_)
+CombatUnit::UnitState ActionHandler::checkUnitsDeath(std::vector<CombatUnit*> units_)
 {
-    return unit_->getState();
+    for (auto& unit : units_) {
+
+        if (unit->getState() == CombatUnit::UnitState::DEAD) {
+
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is dead\n";
+            return CombatUnit::UnitState::DEAD;
+        }
+
+        else {
+
+            // Do nothing
+
+        }
+    }
 }
 
 void ActionHandler::updateUnitsState(std::vector<CombatUnit*> units_)
@@ -69,12 +89,15 @@ void ActionHandler::updateUnitsState(std::vector<CombatUnit*> units_)
         if (unit->getLife() <= 0) {
 
             unit->setState(CombatUnit::UnitState::DEAD);
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is " << unit->getState() << "(0:ALIVE/1:DEAD) \n";
 
         }
 
         else if (unit->getLife() > 0) {
 
             unit->setState(CombatUnit::UnitState::ALIVE);
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is " << unit->getState() << "(0:ALIVE/1:DEAD) \n";
+
         }
     }
 }
@@ -89,11 +112,11 @@ void ActionHandler::updateAffections(std::vector<CombatUnit*> units_)
         for (it = unit->getAffection().begin(); it != unit->getAffection().end(); it++) {
             if (it->first == 0) {
                 unit->getAffection().erase(it);
-                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit" << unit->getId() << " is not more affected by : " << it->second << "\n";
+                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is not more affected by : " << it->second << "\n";
             }
             else if (it->first != 0) {
                 it->first = it->first--;
-                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit" << unit->getId() << "is affected by : " << it->second << "within :" << it->first << "turns remaining \n";
+                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is affected by : " << it->second << " within : " << it->first << " turns remaining \n";
             }
         }
     }
@@ -112,21 +135,40 @@ void ActionHandler::updateSkills(std::vector<CombatUnit*> units_)
             if (it->getCount() == 0) {
 
                 it->setState(Skills::SkillState::READY);
-                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit" << unit->getId() << " has skill : " << it->getType() << " with state : " << it->getState() << "(READY)\n";
+                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " has skill : " << it->getType() << " with state : " << it->getState() << " (0:READY/1:LOADING)\n";
 
             }
 
-            else if (it->getCount() != 0) {
+            else if (it->getCount() > 0) {
 
                 it->setCount(it->getCount() - 1);
-                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit" << unit->getId() << " has skill : " << it->getType() << " within : " << it->getState() << "turns remaining \n";
+                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " has skill : " << it->getType() << " within : " << it->getCount() << " turns remaining \n";
 
-                
             }
         }
     }
 
     std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units skills turns cooldown \n";
+}
+
+ActionHandler::SkillAction ActionHandler::launchSkill(CombatUnit* unit_)
+{
+    int result;
+
+    result = std::rand() < unit_->getSkills().at(0).getSuccess()* (RAND_MAX + 1.0);
+
+    if (result == 0) {
+
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " failed its skill : " << unit_->getSkills().at(0).getType() << "\n";
+        unit_->getSkills().at(0).setState(Skills::SkillState::LOADING);
+        return SkillAction::FAILED;
+    }
+    else if (result != 0) {
+
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " successfully launched skill : " << unit_->getSkills().at(0).getType() << "\n";
+        unit_->getSkills().at(0).setState(Skills::SkillState::LOADING);
+        return SkillAction::LAUNCHED;
+    }
 }
 
 void ActionHandler::applySkill(CombatUnit* launcher_, CombatUnit* receiver_)
@@ -143,14 +185,14 @@ void ActionHandler::applySkill(CombatUnit* launcher_, CombatUnit* receiver_)
         receiver_->setAffection(affection);
         launcher_->getSkills().at(0).setState(Skills::SkillState::LOADING);
 
-        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit" << launcher_->getId() << " stunned unit " << receiver_->getId() << "\n";
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << launcher_->getId() << " stunned unit " << receiver_->getId() << "\n";
 
         break;
     case Skills::SkillType::CHARGE:
         dmg = launcher_->getWeapon().getDamage();
         launcher_->getWeapon().setBuff(buff);
 
-        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit" << launcher_->getId() << " enchanced its weapon : " << launcher_->getWeapon().getType() << "with buff : " << launcher_->getWeapon().getBuffs().at(0).second << "\n";
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << launcher_->getId() << " enchanced its weapon : " << launcher_->getWeapon().getType() << " with buff : " << launcher_->getWeapon().getBuffs().at(0).second << "\n";
         break;
     }
 }
@@ -173,15 +215,25 @@ void ActionHandler::applyBasicAttack(CombatUnit* launcher_, CombatUnit* receiver
 
         // Apply difference on unit life
         receiver_->setLife(rec_life - diff);
+
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << launcher_->getId() << " did " << dmg << " basic damage on unit " << receiver_->getId() << "\n";
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << receiver_->getId() << " shield : " << receiver_->getShield() << " life : " << receiver_->getLife() << "\n";
+
     }
     else if (rec_shield == dmg) {
         // Apply basic attack damage on unit life
         receiver_->setShield(rec_life - dmg);
+
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << launcher_->getId() << " did " << dmg << " basic damage on unit " << receiver_->getId() << "\n";
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << receiver_->getId() << " shield : " << receiver_->getShield() << " life : " << receiver_->getLife() << "\n";
     }
 
     else if (rec_shield > dmg) {
         // Apply basic attack damage on unit shield
         receiver_->setShield(rec_life - dmg);
+
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << launcher_->getId() << " did " << dmg << " basic damage on unit " << receiver_->getId() << "\n";
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << receiver_->getId() << " shield : " << receiver_->getShield() << " life : " << receiver_->getLife() << "\n";
     }
 
 }

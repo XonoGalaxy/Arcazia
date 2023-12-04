@@ -131,7 +131,7 @@ protected:
     /// \brief                                  Combat unit skills
     std::vector<Skills>                         m_skills;
 
-    /// \brief                                  Combat unit affection associeted with time effect
+    /// \brief                                  Combat unit affection associated with number turns that effect lasts
     std::vector<std::pair<int,UnitAffection>>   m_affections;
 
 private:
