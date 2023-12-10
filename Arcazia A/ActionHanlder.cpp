@@ -133,36 +133,7 @@ void ActionHandler::updateAffections(std::vector<CombatUnit*> units_)
         }
     }
 
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units weapon buffs \n";
-
-
-    //for (auto& unit : units_) {
-
-    //    // Check if unit has affection
-    //    if (unit->getAffection().empty()) {
-
-    //        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " has no affection\n";
-    //        // No update possible
-    //    }
-    //    else {
-
-    //        std::vector<std::pair<int, CombatUnit::UnitAffection>>::iterator it;
-
-    //        for (it = unit->getAffection().begin(); it != unit->getAffection().end(); it++) {
-    //            if (it->first == 0) {
-    //                unit->getAffection().erase(it);
-    //                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is not more affected by : " << it->second << "\n";
-    //            }
-    //            else if (it->first != 0) {
-    //                it->first = it->first--;
-    //                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is affected by : " << it->second << " within : " << it->first << " turns remaining \n";
-    //            }
-    //        }
-
-    //    }
-    //}
-
-    //std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units affections turns effect \n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units affections \n";
 }
 
 void ActionHandler::updateSkills(std::vector<CombatUnit*> units_)
@@ -245,7 +216,7 @@ ActionHandler::SkillAction ActionHandler::launchSkill(CombatUnit* unit_)
     int result;
     int count;
 
-    result = std::rand() < unit_->getSkills().at(0).getSuccess()* (RAND_MAX + 1.0);
+    result = std::rand() < unit_->getSkills().at(0).getSuccess() * ((double)RAND_MAX + 1.0);
 
     if (result == 0) {
 
