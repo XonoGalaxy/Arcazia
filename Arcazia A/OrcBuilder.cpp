@@ -26,7 +26,7 @@ void OrcBuilder::reset()
 	this->m_orc = new Orc();
 }
 
-void OrcBuilder::setWeapon(Weapon w_)
+void OrcBuilder::setWeapon(Weapon* w_)
 {
 	m_orc->setWeapon(w_);
 }

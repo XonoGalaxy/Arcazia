@@ -12,7 +12,7 @@
 
 #include "Knight.h"
 
-Knight::Knight() : CombatUnit(20, 60, UnitState::ALIVE)
+Knight::Knight() : CombatUnit(20, 50, UnitState::ALIVE)
 {
     m_type = KNIGHT;
 }

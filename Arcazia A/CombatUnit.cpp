@@ -40,7 +40,7 @@ int CombatUnit::getShield() const
     return m_shield;
 }
 
-Weapon CombatUnit::getWeapon() const
+Weapon* CombatUnit::getWeapon() const
 {
     return m_weapon;
 }
@@ -80,7 +80,7 @@ void CombatUnit::setShield(int shield_)
     m_shield = shield_;
 }
 
-void CombatUnit::setWeapon(Weapon weapon_)
+void CombatUnit::setWeapon(Weapon* weapon_)
 {
     m_weapon = weapon_;
 }

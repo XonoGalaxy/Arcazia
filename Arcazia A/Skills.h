@@ -35,7 +35,7 @@ public:
     //Skills(Skills&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    Skills(double success_, int loading_, SkillState state_, int turns_, SkillType type_);
+    Skills(double success_, int loading_, SkillState state_, int turns_, SkillType type_, int count_);
 
     /// \brief      Destructor
     ~Skills();
@@ -81,6 +81,7 @@ public:
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
     **/ /** @{ ******************************************************************/
+
 
 protected:
     /** @}*/ /*******************************************************************/

@@ -24,7 +24,7 @@ void UnitBuilder::reset()
 {
 }
 
-void UnitBuilder::setWeapon(Weapon w_)
+void UnitBuilder::setWeapon(Weapon* w_)
 {
 }
 

@@ -71,7 +71,7 @@ protected:
     void            reset();
 
     /// \brief      Equip weapon on combat Unit
-    void            setWeapon(Weapon w_);
+    void            setWeapon(Weapon* w_);
 
     /// \brief      Equip skills on combat unit
     void            setSkills(Skills skill_);

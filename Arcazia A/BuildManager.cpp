@@ -67,11 +67,11 @@ void BuildManager::constructKnight(UnitBuilder* builder_, UnitConfig config_)
     switch (config_.weapon) {
 
     case Weapon::WeaponType::AXE:
-        builder_->setWeapon(Axe());
+        builder_->setWeapon(new Axe());
         break;
 
      case Weapon::WeaponType::SWORD:
-        builder_->setWeapon(Sword());
+        builder_->setWeapon(new Sword());
         break;
     }
 }
@@ -97,11 +97,11 @@ void BuildManager::constructOrc(UnitBuilder* builder_, UnitConfig config_)
     switch (config_.weapon) {
 
     case Weapon::WeaponType::AXE:
-        builder_->setWeapon(Axe());
+        builder_->setWeapon(new Axe());
         break;
 
     case Weapon::WeaponType::SWORD:
-        builder_->setWeapon(Sword());
+        builder_->setWeapon(new Sword());
         break;
     }
 }

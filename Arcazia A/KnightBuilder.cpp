@@ -26,7 +26,7 @@ void KnightBuilder::reset()
 	this->m_knight = new Knight();
 }
 
-void KnightBuilder::setWeapon(Weapon w_)
+void KnightBuilder::setWeapon(Weapon* w_)
 {
 	m_knight->setWeapon(w_);
 }

@@ -60,8 +60,7 @@ void Weapon::setType(WeaponType type_)
     m_type = type_;
 }
 
-void Weapon::setBuff(std::pair<int, WeaponBuff> buff_)
+void Weapon::setBuffs(std::vector<std::pair<int, WeaponBuff>> buff_)
 {
-    // Adding a pair to the vector
-    m_buffs.push_back(buff_);
+    m_buffs = buff_;
 }

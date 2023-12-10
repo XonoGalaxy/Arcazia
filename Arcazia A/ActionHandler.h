@@ -82,6 +82,8 @@ public:
     /// \brief          Update units skills 
     void                updateSkills(std::vector<CombatUnit*> units_);
 
+    void                updateWeaponsBuffs(std::vector<CombatUnit*> units_);
+
     /// \brief          Unit launch a skill
     SkillAction         launchSkill(CombatUnit* unit_);
 

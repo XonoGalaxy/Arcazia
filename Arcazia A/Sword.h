@@ -11,8 +11,8 @@
 
  **/
 
-
 #include "Weapon.h"
+
 class Sword :
     public Weapon
 {
@@ -20,7 +20,6 @@ public:
     /****************************************************************************/
     /** \name       Types aliases
     **/ /** @{ ******************************************************************/
-
 
 
     /** @}*/ /*******************************************************************/
@@ -31,10 +30,10 @@ public:
     Sword();
 
     /// \brief      Copy constructor
-    Sword(const Sword& rhs_) = delete;
+    //Sword(const Sword& rhs_) = delete;
 
     /// \brief      Move constructor
-    Sword(Sword&& rhs_) = delete;
+    //Sword(Sword&& rhs_) = delete;
 
     /// \brief      Assign constructor
     //Sword();
@@ -47,10 +46,10 @@ public:
     **/ /** @{ ******************************************************************/
 
     /// \brief      Copy operator, use default implementation
-    Sword& operator=(const Sword& rhs_) = delete;
+    //Sword& operator=(const Sword& rhs_) = delete;
 
     /// \brief      Move operator, use default implementation
-    Sword& operator=(Sword&& rhs_) = delete;
+    //Sword& operator=(Sword&& rhs_) = delete;
 
     /** @}*/ /*******************************************************************/
     /** \name       Getters, Setters

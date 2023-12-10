@@ -64,7 +64,7 @@ public:
     virtual void    reset();
 
     /// \brief      Equip weapon on combat Unit
-    virtual void    setWeapon(Weapon w_);
+    virtual void    setWeapon(Weapon* w_);
 
     /// \brief      Equip skills on combat unit
     virtual void    setSkills(Skills skills_);

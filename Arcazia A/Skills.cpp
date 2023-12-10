@@ -10,19 +10,22 @@
 
  **/
 
+#include <iostream>
+
 #include "Skills.h"
 
 Skills::Skills()
 {
 }
 
-Skills::Skills(double success_, int loading_, SkillState state_, int turns_, Skills::SkillType type_)
+Skills::Skills(double success_, int loading_, SkillState state_, int turns_, Skills::SkillType type_, int count_)
 {
     m_success   = success_;
     m_load      = loading_;
     m_state     = state_;
     m_turns     = turns_;
     m_type      = type_;
+    m_count     = count_;
 }
 
 Skills::~Skills()

@@ -66,7 +66,7 @@ public:
 
     int             getShield() const;
 
-    Weapon          getWeapon() const;
+    Weapon*         getWeapon() const;
 
     UnitState       getState() const;
 
@@ -84,7 +84,7 @@ public:
 
     void            setShield(int shield_);
 
-    void            setWeapon(Weapon weapon_);
+    void            setWeapon(Weapon* weapon_);
 
     void            setState(UnitState state_);
 
@@ -120,7 +120,7 @@ protected:
     int             m_shield;
 
     /// \brief      Weapon
-    Weapon          m_weapon;
+    Weapon*         m_weapon;
 
     /// \brief      Combat unit state
     UnitState       m_state;

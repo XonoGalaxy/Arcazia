@@ -1,3 +1,4 @@
+#pragma once
 /**
 
     \file       Knight.h
@@ -30,10 +31,10 @@ public:
     Knight();
 
     /// \brief      Copy constructor
-    Knight(const Knight& rhs_) = delete;
+    //Knight(const Knight& rhs_) = delete;
 
     /// \brief      Move constructor
-    Knight(Knight&& rhs_) = delete;
+    //Knight(Knight&& rhs_) = delete;
 
     /// \brief      Assign constructor
     //Knight();

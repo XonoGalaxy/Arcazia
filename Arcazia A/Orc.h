@@ -1,3 +1,4 @@
+#pragma once
 /**
 
     \file       Orc.h
@@ -29,10 +30,10 @@ public:
     Orc();
 
     /// \brief      Copy constructor
-    Orc(const Orc& rhs_) = delete;
+    //Orc(const Orc& rhs_) = delete;
 
     /// \brief      Move constructor
-    Orc(Orc&& rhs_) = delete;
+    //Orc(Orc&& rhs_) = delete;
 
     /// \brief      Assign constructor
     //Orc();
@@ -45,10 +46,10 @@ public:
     **/ /** @{ ******************************************************************/
 
     /// \brief      Copy operator, use default implementation
-    Orc& operator=(const Orc& rhs_) = delete;
+    //Orc& operator=(const Orc& rhs_) = delete;
 
     /// \brief      Move operator, use default implementation
-    Orc& operator=(Orc&& rhs_) = delete;
+    //Orc& operator=(Orc&& rhs_) = delete;
 
     /** @}*/ /*******************************************************************/
     /** \name       Getters, Setters

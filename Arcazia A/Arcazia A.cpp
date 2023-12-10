@@ -14,8 +14,10 @@
 #include "BuildManager.h"
 #include "KnightBuilder.h"
 #include "OrcBuilder.h"
+#include "CombatProtocol1v1.h"
 
 int main() {
+
     std::cout << "WELCOME TO ARCAZIA : Alpha version\n";
 
     std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Configuration\n";
@@ -47,41 +49,49 @@ int main() {
 
     // Afficher un tableau de statistique pour chaque unité de combat prêt
     // Faire une fonction qui montre les stats des unités de combat sous forme de tableau
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit01->getId() << " type : " << unit01->getType() << "\n";
+ /* std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit01->getId() << " type : " << unit01->getType() << "\n";
     std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit01->getId() << " life point : " << unit01->getLife() << "\n";
     std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " type : " << unit02->getType() << "\n";
     std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " weapon type : " << unit02->getWeapon().getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " weapon damage : " << unit02->getWeapon().getDamage() << "\n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " weapon damage : " << unit02->getWeapon().getDamage() << "\n";*/
 
     // Combat system initialization
-    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM |INFO : Initialization\n";
-    // Client code of the commands pattern, here
-    // Create receivers : ActionHandler
-    // Create action commands and associate with them with receivers 
-    // Create senders, and associate them with specific commands
+    std::vector<CombatUnit*> opponents = { unit01, unit02 };
+    CombatProtocol1v1* protocol = new CombatProtocol1v1(opponents);
 
+    //if (opponents.at(0)->getWeapon()->getBuffs().empty()) {
+
+    //    opponents.at(0)->getWeapon()->setBuff(std::make_pair(10, Weapon::WeaponBuff::NONE));
+
+    //    std::cout << "LOG : Buff turn OK : " << opponents.at(0)->getWeapon()->getBuffs().at(0).first << "\n";
+    //    std::cout << "LOG : Buff type OK : " << opponents.at(0)->getWeapon()->getBuffs().at(0).second << "\n";
+
+    //}
+
+    // Start protocol
+    protocol->launchCombatProtocol1v1();
 
 
     //std::cout << "LOG : GAME INTERFACE | INFO : Choose a combat protocol \n";
     // Combat protocol choice
 
-    std::cout << "LOG : GAME INTERFACE | INFO : Choose 2 combat units \n";
+    //std::cout << "LOG : GAME INTERFACE | INFO : Choose 2 combat units \n";
     // Combat unit choice
-    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM |INFO : Initialization\n";
+    //std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM |INFO : Initialization\n";
 
-    std::cout << "LOG : GAME INTERFACE | INFO : [0,1] ?\n";
+    //std::cout << "LOG : GAME INTERFACE | INFO : [0,1] ?\n";
 
     // CombatProtocol1v1 combat01;
     // combat01->m_opponent01 = kb->getKnight();
     // combat01->m_opponent02 = ob->getKnight();
 
-    std::cout << "LOG : GAME INTERFACE | INFO : Would you like to start a combat ? [Y,N]\n";
+    //std::cout << "LOG : GAME INTERFACE | INFO : Would you like to start a combat ? [Y,N]\n";
     // Launch combat
 
     // Lancement du système de combat
-    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat initialization \n";
-    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat configuration \n";
-    std::cout << "LOG : GAME INTERFACE | INFO : Combat starts \n";
+    //std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat initialization \n";
+    //std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat configuration \n";
+    //std::cout << "LOG : GAME INTERFACE | INFO : Combat starts \n";
 
     // Display combat information to player
 

@@ -21,7 +21,7 @@ public:
     **/ /** @{ ******************************************************************/
 
     enum WeaponType { SWORD = 0, AXE = 1 };
-    enum WeaponBuff { CHARGE = 0 };
+    enum WeaponBuff { CHARGE = 0, NONE = 1 };
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
@@ -68,7 +68,7 @@ public:
 
     void            setType(WeaponType type_);
 
-    void            setBuff(std::pair<int, WeaponBuff> buff_);
+    void            setBuffs(std::vector<std::pair<int, WeaponBuff>> buff_);
 
 
     /** @}*/ /*******************************************************************/

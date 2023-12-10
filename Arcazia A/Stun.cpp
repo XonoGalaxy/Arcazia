@@ -12,7 +12,7 @@
 
 #include "Stun.h"
 
-Stun::Stun() : Skills(0.20, 5, SkillState::READY, 1, Skills::SkillType::STUN)
+Stun::Stun() : Skills(0.20, 5, SkillState::READY, 1, Skills::SkillType::STUN, 0)
 {
 }
 

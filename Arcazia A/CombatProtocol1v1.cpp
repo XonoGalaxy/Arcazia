@@ -20,12 +20,27 @@ CombatProtocol1v1::CombatProtocol1v1()
 
     // Set all skills to READY
     
+    // Set all affection to NONE
+}
+
+CombatProtocol1v1::CombatProtocol1v1(std::vector<CombatUnit*> opponents_)
+{
+    m_opponents = opponents_;
+
+    /* Initiate protocol */
+    m_turns = 0;
+    m_state = CombatState::STARTED;
+
+    // Set all skills to READY
 
     // Set all affection to NONE
+    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Initializated protocol\n";
+
 }
 
 CombatProtocol1v1::~CombatProtocol1v1()
 {
+
 }
 
 std::vector<CombatUnit*> CombatProtocol1v1::getOpponents()
@@ -43,9 +58,12 @@ void CombatProtocol1v1::setOpponent(CombatUnit* opponent_)
 void CombatProtocol1v1::launchCombatProtocol1v1()
 {
 
+    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat Protocol 1v1 with Unit "  << m_opponents.at(0)->getId() << " vs " << m_opponents.at(1)->getId() <<  " is starting\n";
+
     /* Start protcol */
     while (m_state != CombatState::ENDED) {
 
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat Protocol 1v1 turn number : " << m_turns << " is starting\n";
         /* Start Opponent 1 turn */
         // Step 1 : Opponent 1 launch a skill on opponent 2
         // Check if opponent 1 can launch a skill
@@ -56,7 +74,6 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
 
                 // Apply skill effect
                 m_actionHandler->applySkill(m_opponents.at(0), m_opponents.at(1));
-
             }
             else {
                 // No skill application because skill launch failed
@@ -66,7 +83,6 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
         else {
             // No skill action possible
         }
-
         // Step 2 : Opponent 1 launch a basic attack on opponent 2
         if (m_actionHandler->checkBasicAttackAction(m_opponents.at(0)) == ActionHandler::CombatAction::YES) {
 
@@ -86,15 +102,25 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
 
         // Update skills 
         m_actionHandler->updateSkills(m_opponents);
-
+    
         // Update units state
         m_actionHandler->updateUnitsState(m_opponents);
+
+        // Update units weapon buffs
+        m_actionHandler->updateWeaponsBuffs(m_opponents);
 
         // Check if one unit is dead
         if (m_actionHandler->checkUnitsDeath(m_opponents) == CombatUnit::UnitState::DEAD) {
 
             m_state = CombatState::ENDED;
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat Protocol 1v1 with Unit" << m_opponents.at(0)->getId() << " vs " << m_opponents.at(1)->getId() << " finished\n";
 
+            // Look for the survivor which is the winner
+            for (auto& unit : m_opponents) {
+                if (unit->getState() == CombatUnit::UnitState::ALIVE) {
+                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : The winner is Unit " << unit->getId() <<  "!\n";
+                }
+            }
         }
 
         else {
@@ -104,6 +130,7 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
         //Step 2 : Update protocol turns
         m_turns++;
 
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat Protocol 1v1 turn number : " << m_turns << " is starting\n";
         /* Start Opponent 2 turn */
         // Check if opponent 2 can launch a skill
         if (m_actionHandler->checkSkillAction(m_opponents.at(1)) == ActionHandler::CombatAction::YES) {
@@ -147,11 +174,22 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
         // Update units state
         m_actionHandler->updateUnitsState(m_opponents);
 
+        // Update units weapon buffs
+        m_actionHandler->updateWeaponsBuffs(m_opponents);
+ 
+
         // Check if one unit is dead
         if (m_actionHandler->checkUnitsDeath(m_opponents) == CombatUnit::UnitState::DEAD) {
 
             m_state = CombatState::ENDED;
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat Protocol 1v1 with Unit" << m_opponents.at(0)->getId() << " vs " << m_opponents.at(1)->getId() << " finished\n";
 
+            // Look for the survivor which is the winner
+            for (auto& unit : m_opponents) {
+                if (unit->getState() == CombatUnit::UnitState::ALIVE) {
+                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : The winner is Unit " << unit->getId() << "!\n";
+                }
+            }
         }
 
         else {
@@ -160,5 +198,6 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
 
         //Step 2 : Update protocol turns
         m_turns++;
+
     }
 }

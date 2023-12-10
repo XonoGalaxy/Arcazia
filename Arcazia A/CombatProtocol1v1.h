@@ -22,6 +22,7 @@ public:
     **/ /** @{ ******************************************************************/
 
     enum CombatState { STARTED = 0, ENDED = 1 };
+    enum OpponentState { WINNER = 0, LOSER = 1};
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
@@ -37,7 +38,7 @@ public:
     //CombatProtocol1v1(CombatProtocol1v1&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    //CombatProtocol1v1();
+    CombatProtocol1v1(std::vector<CombatUnit*> opponents_);
 
     /// \brief      Destructor
     ~CombatProtocol1v1();

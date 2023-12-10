@@ -12,7 +12,7 @@
 
 #include "Charge.h"
 
-Charge::Charge() : Skills(0.60, 3, SkillState::READY, 1, Skills::SkillType::CHARGE)
+Charge::Charge() : Skills(0.60, 3, SkillState::READY, 1, Skills::SkillType::CHARGE, 0)
 {
 }
 
