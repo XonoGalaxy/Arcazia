@@ -22,6 +22,7 @@ public:
     **/ /** @{ ******************************************************************/
 
     enum CommandType { LAUNCH_COMBAT = 0, DISPLAY_UNITS_STATS = 1 };
+    enum GameState { STARTED = 0, FINISHED = 1 };
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
@@ -50,13 +51,18 @@ public:
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
 
+    GameState       getState();
+
+    void            setState(GameState state_);
+
+
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
     **/ /** @{ ******************************************************************/
 
-    void	displayMenu();
+    void	        displayMenu();
 
-    void 	executeCommand(CommandType command_);
+    void 	        executeCommand(CommandType command_);
 
 
 protected:
@@ -71,6 +77,8 @@ protected:
     CombatProtocol1v1*          m_protocol;
 
     std::vector<CombatUnit*>    m_units;
+
+    GameState                   m_state;
 
 
 private:

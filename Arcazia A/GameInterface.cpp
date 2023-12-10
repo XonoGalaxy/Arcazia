@@ -20,17 +20,29 @@ GameInterface::GameInterface(std::vector<CombatUnit*> units_, CombatProtocol1v1*
 {
     m_units     = units_;
     m_protocol  = protocol_;
+    m_state     = GameInterface::GameState::STARTED;
 }
 
 GameInterface::~GameInterface()
 {
 }
 
-void GameInterface::displayMenu() 
+GameInterface::GameState GameInterface::getState()
 {
-    std::cout << "LOG : GAME INTERFACE | INFO : Menu\n";
+    return m_state;
+}
+
+void GameInterface::setState(GameState state_)
+{
+    m_state = state_;
+}
+
+void GameInterface::displayMenu()
+{
     std::cout << "LOG : GAME INTERFACE | INFO : Please select a command\n";
     std::cout << "LOG : GAME INTERFACE |         ___________________________________________________________________________\n";
+    std::cout << "LOG : GAME INTERFACE |        |                                   Menu                                    |\n";
+    std::cout << "LOG : GAME INTERFACE |        |___________________________________________________________________________|\n";
     std::cout << "LOG : GAME INTERFACE |        | Launch a combat with the current units configuration -> Command input : "<< CommandType::LAUNCH_COMBAT <<" |\n";
     std::cout << "LOG : GAME INTERFACE |        | Display current units statistics                     -> Command input : " << CommandType::DISPLAY_UNITS_STATS << " |\n";
     std::cout << "LOG : GAME INTERFACE |        |___________________________________________________________________________|\n";
@@ -50,7 +62,7 @@ void GameInterface::executeCommand(CommandType command_)
 
         for (auto& unit : m_units) {
 
-            //unit->showStats();
+            unit->showStats();
 
         }
 

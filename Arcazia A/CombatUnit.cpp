@@ -109,3 +109,15 @@ void CombatUnit::setId(int id_)
 {
     m_id = id_;
 }
+
+void CombatUnit::showStats()
+{
+    std::cout << "LOG : GAME INTERFACE |         _______________________________________________________________\n";
+    std::cout << "LOG : GAME INTERFACE |        |           |  Unit " << this->getId() << " statistics          \n";
+    std::cout << "LOG : GAME INTERFACE |        |___________|___________________________________________________\n";
+    std::cout << "LOG : GAME INTERFACE |        | Type      |   " << this->getType() << "   (0:KNIGHT/1:ORC)    \n";
+    std::cout << "LOG : GAME INTERFACE |        | Life      |   " << this->getLife() << "                       \n";
+    std::cout << "LOG : GAME INTERFACE |        | Shield    |   " << this->getShield() << "                     \n";
+    std::cout << "LOG : GAME INTERFACE |        | Skill     |   " << this->getSkills().at(0).getType() << "     \n";
+    std::cout << "LOG : GAME INTERFACE |        |___________|___________________________________________________\n";
+}

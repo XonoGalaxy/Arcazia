@@ -19,7 +19,18 @@
 
 int main() {
 
-    std::cout << "WELCOME TO ARCAZIA : Alpha version\n";
+    std::cout << " ____________________________________________________________  \n";
+    std::cout << "|                     WELCOME TO ARCAZIA                     | \n";
+    std::cout << "|                     Alpha 1.0 version                      | \n";
+    std::cout << "|____________________________________________________________| \n";
+
+        // __________________________
+        //|    Welcome to Arcazia    |
+        //|__________________________|
+        //        ||
+        //(\__/)  ||
+        //(•ㅅ•)  ||
+        /// 　 づ
 
     std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Configuration\n";
 
@@ -56,21 +67,27 @@ int main() {
 
     // Game interface initialization
     GameInterface* interface = new GameInterface(opponents, protocol);
- 
-    interface->displayMenu();
 
     int player_input = 99;
 
     // Menu interaction
     while (player_input >= 0 || player_input <= 1) 
     {
+        interface->displayMenu();
         std::cout << "LOG : GAME INTERFACE | INFO : Player input : ";
 
         std::cin >> player_input;
 
         if (player_input == 0) {
 
-            interface->executeCommand(static_cast<GameInterface::CommandType>(player_input));
+            if (interface->getState() == GameInterface::GameState::FINISHED) {
+                std::cout << "LOG : GAME INTERFACE | INFO : Combat is done and game finished, please restart ARCAZIA for a new combat game\n";
+            }
+            else {
+                interface->executeCommand(static_cast<GameInterface::CommandType>(player_input));
+                interface->setState(GameInterface::GameState::FINISHED);
+
+            }
 
         }
         else if (player_input == 1) {
@@ -82,4 +99,3 @@ int main() {
         }
     }
 }
-
