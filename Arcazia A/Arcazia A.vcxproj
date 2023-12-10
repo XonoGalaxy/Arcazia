@@ -165,6 +165,7 @@
     <ClCompile Include="Charge.cpp" />
     <ClCompile Include="CombatProtocol1v1.cpp" />
     <ClCompile Include="CombatUnit.cpp" />
+    <ClCompile Include="GameInterface.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="KnightBuilder.cpp" />
     <ClCompile Include="Orc.cpp" />
@@ -182,8 +183,10 @@
     <ClInclude Include="Charge.h" />
     <ClInclude Include="CombatProtocol1v1.h" />
     <ClInclude Include="CombatUnit.h" />
+    <ClInclude Include="GameInterface.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="KnightBuilder.h" />
+    <ClInclude Include="LaunchCombatCommand.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="OrcBuilder.h" />
     <ClInclude Include="Skills.h" />

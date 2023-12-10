@@ -15,6 +15,7 @@
 #include "KnightBuilder.h"
 #include "OrcBuilder.h"
 #include "CombatProtocol1v1.h"
+#include "GameInterface.h"
 
 int main() {
 
@@ -33,12 +34,12 @@ int main() {
 
         case CombatUnit::UnitType::KNIGHT:
             bm->constructKnight(kb, unit);
-            std::cout << "LOG : GAME INTERFACE | INFO : Unit " << unit.id << " is ready as Knight\n";
+            //std::cout << "LOG : GAME INTERFACE | INFO : Unit " << unit.id << " is ready as Knight\n";
             break;
 
         case CombatUnit::UnitType::ORC:
             bm->constructOrc(ob, unit);
-            std::cout << "LOG : GAME INTERFACE | INFO : Unit " << unit.id << " is ready as Orc\n";
+            //std::cout << "LOG : GAME INTERFACE | INFO : Unit " << unit.id << " is ready as Orc\n";
             break;
         }
     }
@@ -47,26 +48,38 @@ int main() {
     Knight* unit01 = kb->getKnight();
     Orc* unit02 = ob->getOrc();
 
-    // Show unit stats
- /* std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit01->getId() << " type : " << unit01->getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit01->getId() << " life point : " << unit01->getLife() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " type : " << unit02->getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " weapon type : " << unit02->getWeapon().getType() << "\n";
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | DEBUG : Unit " << unit02->getId() << " weapon damage : " << unit02->getWeapon().getDamage() << "\n";*/
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Initialized units\n";
 
     // Combat system initialization
     std::vector<CombatUnit*> opponents = { unit01, unit02 };
     CombatProtocol1v1* protocol = new CombatProtocol1v1(opponents);
 
-    // Launch combat
-    //std::cout << "LOG : GAME INTERFACE | INFO : Would you like to start a combat ? [Y,N]\n";
+    // Game interface initialization
+    GameInterface* interface = new GameInterface(opponents, protocol);
+ 
+    interface->displayMenu();
 
-    // Start protocol
-    protocol->launchCombatProtocol1v1();
+    int player_input = 99;
 
-    // Show combat stats
-    // Show unit stats
+    // Menu interaction
+    while (player_input >= 0 || player_input <= 1) 
+    {
+        std::cout << "LOG : GAME INTERFACE | INFO : Player input : ";
 
+        std::cin >> player_input;
 
+        if (player_input == 0) {
+
+            interface->executeCommand(static_cast<GameInterface::CommandType>(player_input));
+
+        }
+        else if (player_input == 1) {
+
+            interface->executeCommand(static_cast<GameInterface::CommandType>(player_input));
+        }
+        else {
+            std::cout << "LOG : GAME MOTOR | GAME INTERFACE | INFO : Command type doesn't exist\n";
+        }
+    }
 }
 
