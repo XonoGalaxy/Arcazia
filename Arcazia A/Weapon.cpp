@@ -40,9 +40,9 @@ Weapon::WeaponType Weapon::getType() const
     return m_type;
 }
 
-std::vector<std::pair<int, Weapon::WeaponBuff>> Weapon::getBuffs() const
+std::pair<int, Weapon::WeaponBuff> Weapon::getBuff() const
 {
-    return m_buffs;
+    return m_buff;
 }
 
 /**
@@ -60,7 +60,7 @@ void Weapon::setType(WeaponType type_)
     m_type = type_;
 }
 
-void Weapon::setBuffs(std::vector<std::pair<int, WeaponBuff>> buff_)
+void Weapon::setBuff(std::pair<int, WeaponBuff> buff_)
 {
-    m_buffs = buff_;
+    m_buff = buff_;
 }

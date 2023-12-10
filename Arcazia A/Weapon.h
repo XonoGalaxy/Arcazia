@@ -61,14 +61,14 @@ public:
 
     WeaponType      getType() const;
 
-    std::vector<std::pair<int, WeaponBuff>> getBuffs() const;
+    std::pair<int, WeaponBuff> getBuff() const;
 
     /// \brief      Setter : m_damage
     void            setDamage(int damage_);
 
     void            setType(WeaponType type_);
 
-    void            setBuffs(std::vector<std::pair<int, WeaponBuff>> buff_);
+    void            setBuff(std::pair<int, WeaponBuff> buff_);
 
 
     /** @}*/ /*******************************************************************/
@@ -92,7 +92,7 @@ protected:
     WeaponType      m_type;
 
     /// \brief                                Weapon temporary beneficial status effect
-    std::vector<std::pair<int, WeaponBuff>>   m_buffs;
+    std::pair<int, WeaponBuff>   m_buff;
 
 private:
     /** @}*/ /*******************************************************************/

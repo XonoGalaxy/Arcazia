@@ -182,104 +182,43 @@ void ActionHandler::updateSkills(std::vector<CombatUnit*> units_)
 void ActionHandler::updateWeaponsBuffs(std::vector<CombatUnit*> units_)
 {
 
-    std::vector<std::pair<int, Weapon::WeaponBuff>> tmp;
+    std::pair<int, Weapon::WeaponBuff> tmp;
+    int dmg;
 
-    for (int a = 0; a <= units_.size(); a++) {
+    for (auto& unit : units_) {
 
-        for (int b = 0; b <= units_.at(a)->getWeapon()->getBuffs().size(); b++) {
+        if (unit->getWeapon()->getBuff().first != 0) {
 
-            std::cout << "LOG : HERE 1\n";
+            tmp = unit->getWeapon()->getBuff();
+            tmp.first--;
 
-            if (units_.at(a)->getWeapon()->getBuffs().at(b).first != 0) {
+            if (tmp.first == 0) {
 
-                std::cout << "LOG : HERE 2\n";
+                if (tmp.second == Weapon::WeaponBuff::CHARGE) {
 
-                std::cout << "LOG : Buff turn : " << units_.at(a)->getWeapon()->getBuffs().at(b).first << "\n";
+                    // Reset charged weapong effect
+                    dmg = unit->getWeapon()->getDamage();
+                    unit->getWeapon()->setDamage(dmg / 2);
 
-                tmp = units_.at(a)->getWeapon()->getBuffs();
-                tmp.at(b) = std::make_pair(units_.at(a)->getWeapon()->getBuffs().at(b).first - 1, units_.at(a)->getWeapon()->getBuffs().at(b).second);
+                    tmp.second = Weapon::WeaponBuff::NONE;
+                    unit->getWeapon()->setBuff(tmp);
 
-                units_.at(a)->getWeapon()->setBuffs(tmp);
+                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " has no more enhanced weapon\n";
 
-                std::cout << "LOG : Buff turn : " << units_.at(a)->getWeapon()->getBuffs().at(b).first << "\n";
-
-                if (units_.at(a)->getWeapon()->getBuffs().at(b).first == 0) {
-
-                    std::cout << "LOG : HERE 4\n";
-
-                    if (units_.at(a)->getWeapon()->getBuffs().at(b).second == Weapon::WeaponBuff::CHARGE) {
-
-                        int dmg;
-                        dmg = units_.at(a)->getWeapon()->getDamage();
-                        units_.at(a)->getWeapon()->setDamage(dmg / 2);
-
-                        units_.at(a)->getWeapon()->getBuffs().at(b).second = Weapon::WeaponBuff::NONE;
-
-                        std::cout << "LOG : Buff turn : " << units_.at(a)->getWeapon()->getBuffs().at(b).first << "\n";
-                        std::cout << "LOG : Buff type : " << units_.at(a)->getWeapon()->getBuffs().at(b).second << "\n";
-                        std::cout << "LOG : Damage : " << units_.at(a)->getWeapon()->getDamage() << "\n";
-
-                    }
-
+                }
+                else {
+                    //Do nothing
                 }
             }
             else {
                 // Do nothing
+
             }
         }
-
+        else {
+            //Do nothing
+        }
     }
-
-    //for (auto& unit : units_) {
-
-    //    for (auto& buff : unit->getWeapon()->getBuffs()) {
-
-    //        std::cout << "LOG : Buff turn : " << buff.first << "\n";
-    //        std::cout << "LOG : Buff type : " << buff.second << "\n";
-    //        
-    //        if (buff.first != 0) {
-    //            
-    //            // Update weapon buff turns effect
-    //            buff.first--;
-
-    //            if (buff.first == 0) {
-
-    //                if (buff.second == Weapon::WeaponBuff::CHARGE) {
-
-    //                    int dmg;
-    //                    dmg = unit->getWeapon()->getDamage();
-    //                    unit->getWeapon()->setDamage(dmg / 2);
-
-    //                    buff.second = Weapon::WeaponBuff::NONE;
-    //                    buff.first = 10;
-    //                    std::cout << "LOG : Buff turn : " << buff.first << "\n";
-    //                    std::cout << "LOG : Buff type : " << buff.second << "\n";
-    //                    std::cout << "LOG : Damage : " << unit->getWeapon()->getDamage() << "\n";
-    //                }
-    //                else {
-    //                    // Do nothing
-    //                }
-
-    //                buff.second = Weapon::WeaponBuff::NONE;
-    //            }
-    //            else {
-    //                 // Do nothing
-    //            }
-    //        }
-    //    }
-
-        //if (!unit->getWeapon()->getBuffs().empty()) {
-
-        //    unit->getWeapon()->getBuffs().at(0).first = 5;
-        //    unit->getWeapon()->getBuffs().at(0).second = Weapon::WeaponBuff::NONE;
-
-
-        //    std::cout << "LOG : Buff turn 2 : " << unit->getWeapon()->getBuffs().at(0).first << "\n";
-        //    std::cout << "LOG : Buff type 2 : " << unit->getWeapon()->getBuffs().at(0).second << "\n";
-
-        //}
-
-    //}
 
     std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units weapon buffs \n";
 }
@@ -317,10 +256,8 @@ ActionHandler::SkillAction ActionHandler::launchSkill(CombatUnit* unit_)
 void ActionHandler::applySkill(CombatUnit* launcher_, CombatUnit* receiver_)
 {
     // Caches
-    std::pair<int, CombatUnit::UnitAffection> affection = { launcher_->getSkills().at(0).getTurns(), CombatUnit::UnitAffection::STUNNED};
-
-    std::vector<std::pair<int, Weapon::WeaponBuff>> tmp_buff = launcher_->getWeapon()->getBuffs();
-    tmp_buff.push_back(std::make_pair(launcher_->getSkills().at(0).getTurns(), Weapon::WeaponBuff::CHARGE));
+    std::pair<int, CombatUnit::UnitAffection> affection = { launcher_->getSkills().at(0).getTurns(), CombatUnit::UnitAffection::STUNNED };
+    std::pair<int, Weapon::WeaponBuff> buff = { launcher_->getSkills().at(0).getTurns() , Weapon::WeaponBuff::CHARGE };
     
     int dmg;
 
@@ -339,22 +276,12 @@ void ActionHandler::applySkill(CombatUnit* launcher_, CombatUnit* receiver_)
 
         dmg = launcher_->getWeapon()->getDamage();
 
-        // Push back a new buff is empty
-        //if (launcher_->getWeapon()->getBuffs().empty()) {
-
-            launcher_->getWeapon()->setBuffs(tmp_buff);
-        //}
-        // Reset buff if not empty
-        //else {
-         //   launcher_->getWeapon()->getBuffs().at(0).first = buff.first;
-        //    launcher_->getWeapon()->getBuffs().at(0).second = buff.second;
-        //}
+        launcher_->getWeapon()->setBuff(buff);
         
+        // Apply charge buff effect on weapon
         launcher_->getWeapon()->setDamage(dmg * 2);
-
-        std::cout << "LOG : Enchanded Damage : " << launcher_->getWeapon()->getDamage() << "\n";
        
-        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << launcher_->getId() << " enchanced its weapon : " << launcher_->getWeapon()->getType() << " (0:SWORD/1:AXE) with buff : " << launcher_->getWeapon()->getBuffs().at(0).second << " (0:CHARGE)\n";
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << launcher_->getId() << " enchanced its weapon : " << launcher_->getWeapon()->getType() << " (0:SWORD/1:AXE) with buff : " << launcher_->getWeapon()->getBuff().second << " (0:CHARGE)\n";
         break;
     }
 }
