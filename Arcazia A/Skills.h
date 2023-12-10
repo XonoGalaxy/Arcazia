@@ -1,5 +1,4 @@
 #pragma once
-
 /**
 
     \file       Skills.h
@@ -11,7 +10,6 @@
     All rights reserved - XONO GALAXY Proprietary Data.
 
  **/
-
 
 class Skills
 {
@@ -37,7 +35,7 @@ public:
     //Skills(Skills&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    Skills(int success_, int loading_, SkillState state_);
+    Skills(double success_, int loading_, SkillState state_, int turns_, SkillType type_, int count_);
 
     /// \brief      Destructor
     ~Skills();
@@ -56,32 +54,61 @@ public:
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
 
+    SkillState      getState();
+
+    SkillType       getType();
+
+    int             getCount();
+
+    int             getLoad();
+
+    double          getSuccess();
+
+    int             getTurns();
+
+    void            setState(SkillState state_);
+
+    void            setType(SkillType type_);
+
+    void            setCount(int count_);
+
+    void            setLoad(int load_);
+
+    void            setSuccess(double success_);
+
+    void            setTurns(int turns_);
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
     **/ /** @{ ******************************************************************/
+
 
 protected:
     /** @}*/ /*******************************************************************/
     /** \name       Protected Methods, Functions
     **/ /** @{ ******************************************************************/
 
-
     /** @}*/ /*******************************************************************/
     /** \name       Protected Data members
     **/ /** @{ ******************************************************************/
 
-    /// \brief      Skill success rate
-    int             m_success;
+    /// \brief      Skill type
+    SkillType       m_type;
 
-    /// \brief      Skill loading time
-    int             m_loading;
+    /// \brief      Skill success rate
+    double          m_success;
+
+    /// \brief      Number of turns skills need to for reload
+    int             m_load;
+
+    /// \brief      Number of turns before reload
+    int             m_count;
 
     /// \brief      Skill state
     SkillState      m_state;
 
-    /// \brief      Skill type
-    SkillType       m_type;
+    /// \brief      Number of turns skills take effect
+    int             m_turns;
 
 
 private:

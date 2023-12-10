@@ -21,9 +21,9 @@ CombatUnit::CombatUnit()
 
 CombatUnit::CombatUnit(int life_, int shield_, UnitState state_)
 {
-    m_life = life_;
-    m_shield = shield_;
-    m_state = state_;
+    m_life      = life_;
+    m_shield    = shield_;
+    m_state     = state_;
 }
 
 CombatUnit::~CombatUnit()
@@ -40,7 +40,7 @@ int CombatUnit::getShield() const
     return m_shield;
 }
 
-Weapon CombatUnit::getWeapon() const
+Weapon* CombatUnit::getWeapon() const
 {
     return m_weapon;
 }
@@ -60,9 +60,14 @@ std::vector<Skills> CombatUnit::getSkills() const
     return m_skills;
 }
 
-std::vector <CombatUnit::UnitAffection> CombatUnit::getAffection() const
+std::pair<int,CombatUnit::UnitAffection> CombatUnit::getAffection() const
 {
-    return m_affections;
+    return m_affection;
+}
+
+int CombatUnit::getId() const
+{
+    return m_id;
 }
 
 void CombatUnit::setLife(int life_)
@@ -75,7 +80,7 @@ void CombatUnit::setShield(int shield_)
     m_shield = shield_;
 }
 
-void CombatUnit::setWeapon(Weapon weapon_)
+void CombatUnit::setWeapon(Weapon* weapon_)
 {
     m_weapon = weapon_;
 }
@@ -95,7 +100,12 @@ void CombatUnit::setSkills(Skills skill_)
     m_skills.push_back(skill_);
 }
 
-void CombatUnit::setAffection(UnitAffection affection_)
+void CombatUnit::setAffection(std::pair<int, UnitAffection> affection_)
 {
-    m_affections.push_back(affection_);
+    m_affection = affection_;
+}
+
+void CombatUnit::setId(int id_)
+{
+    m_id = id_;
 }

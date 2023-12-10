@@ -26,7 +26,7 @@ void KnightBuilder::reset()
 	this->m_knight = new Knight();
 }
 
-void KnightBuilder::setWeapon(Weapon w_)
+void KnightBuilder::setWeapon(Weapon* w_)
 {
 	m_knight->setWeapon(w_);
 }
@@ -44,6 +44,11 @@ void KnightBuilder::setLifePoint(int life_)
 void KnightBuilder::setShieldPoint(int shield_)
 {
 	m_knight->setShield(shield_);
+}
+
+void KnightBuilder::setId(int id_)
+{
+	m_knight->setId(id_);
 }
 
 Knight* KnightBuilder::getKnight()

@@ -11,14 +11,14 @@
 
  **/
 
- /**
+ /** -----------------------------------------------------------------------------
 
     When adding units : 
         - Update macro AVAILABLE_UNITS to indicate current units to construct
         - Add hardcoded unit structure
         - Update units units vector UNITS_CONFIG
 
-  **/
+  ----------------------------------------------------------------------------- **/
 
 #include "CombatUnit.h"
 #include "Skills.h"

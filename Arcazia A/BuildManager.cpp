@@ -17,6 +17,9 @@ BuildManager::BuildManager()
 {
     //Extract hardcoded units from UnitsConfig.h file
     m_units = UNITS_CONFIG;
+    m_nb = AVAILABLE_UNITS;
+
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : " << AVAILABLE_UNITS << " available units \n";
 }
 
 BuildManager::~BuildManager()
@@ -46,6 +49,7 @@ std::vector<BuildManager::UnitConfig> BuildManager::getUnitsConfig()
 void BuildManager::constructKnight(UnitBuilder* builder_, UnitConfig config_)
 {
     builder_->reset();
+    builder_->setId(config_.id);
     builder_->setLifePoint(config_.life);
     builder_->setShieldPoint(config_.shield);
 
@@ -63,11 +67,11 @@ void BuildManager::constructKnight(UnitBuilder* builder_, UnitConfig config_)
     switch (config_.weapon) {
 
     case Weapon::WeaponType::AXE:
-        builder_->setWeapon(Axe());
+        builder_->setWeapon(new Axe());
         break;
 
      case Weapon::WeaponType::SWORD:
-        builder_->setWeapon(Sword());
+        builder_->setWeapon(new Sword());
         break;
     }
 }
@@ -75,6 +79,7 @@ void BuildManager::constructKnight(UnitBuilder* builder_, UnitConfig config_)
 void BuildManager::constructOrc(UnitBuilder* builder_, UnitConfig config_)
 {
     builder_->reset();
+    builder_->setId(config_.id);
     builder_->setLifePoint(config_.life);
     builder_->setShieldPoint(config_.shield);
 
@@ -92,11 +97,11 @@ void BuildManager::constructOrc(UnitBuilder* builder_, UnitConfig config_)
     switch (config_.weapon) {
 
     case Weapon::WeaponType::AXE:
-        builder_->setWeapon(Axe());
+        builder_->setWeapon(new Axe());
         break;
 
     case Weapon::WeaponType::SWORD:
-        builder_->setWeapon(Sword());
+        builder_->setWeapon(new Sword());
         break;
     }
 }

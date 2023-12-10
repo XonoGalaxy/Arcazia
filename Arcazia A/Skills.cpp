@@ -10,16 +10,84 @@
 
  **/
 
+#include <iostream>
+
 #include "Skills.h"
 
 Skills::Skills()
 {
 }
 
-Skills::Skills(int success_, int loading_, SkillState state_)
+Skills::Skills(double success_, int loading_, SkillState state_, int turns_, Skills::SkillType type_, int count_)
 {
+    m_success   = success_;
+    m_load      = loading_;
+    m_state     = state_;
+    m_turns     = turns_;
+    m_type      = type_;
+    m_count     = count_;
 }
 
 Skills::~Skills()
 {
+}
+
+Skills::SkillState Skills::getState()
+{
+    return m_state;
+}
+
+Skills::SkillType Skills::getType()
+{
+    return m_type;
+}
+
+int Skills::getCount()
+{
+    return m_count;
+}
+
+int Skills::getLoad()
+{
+    return m_load;
+}
+
+double Skills::getSuccess()
+{
+    return m_success;
+}
+
+int Skills::getTurns()
+{
+    return m_turns;
+}
+
+void Skills::setState(SkillState state_)
+{
+    m_state = state_;
+}
+
+void Skills::setType(SkillType type_)
+{
+    m_type = type_;
+}
+
+void Skills::setCount(int count_)
+{
+    m_count = count_;
+}
+
+void Skills::setLoad(int load_)
+{
+    m_load = load_;
+}
+
+void Skills::setSuccess(double success_)
+{
+    m_success = success_;
+}
+
+void Skills::setTurns(int turns_)
+{
+    m_turns = turns_;
 }

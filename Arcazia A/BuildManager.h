@@ -11,6 +11,8 @@
 
  **/
 
+#include <iostream>
+
 #include "UnitBuilder.h"
 #include "Stun.h"
 #include "Charge.h"

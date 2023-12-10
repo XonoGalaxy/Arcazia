@@ -11,6 +11,8 @@
 
  **/
 
+#include <map>
+
 #include "Skills.h"
 
 class Stun :

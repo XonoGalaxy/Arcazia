@@ -11,6 +11,7 @@
 
  **/
 
+#include <vector>
 
 class Weapon
 {
@@ -20,6 +21,7 @@ public:
     **/ /** @{ ******************************************************************/
 
     enum WeaponType { SWORD = 0, AXE = 1 };
+    enum WeaponBuff { CHARGE = 0, NONE = 1 };
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
@@ -59,10 +61,14 @@ public:
 
     WeaponType      getType() const;
 
+    std::pair<int, WeaponBuff> getBuff() const;
+
     /// \brief      Setter : m_damage
     void            setDamage(int damage_);
 
     void            setType(WeaponType type_);
+
+    void            setBuff(std::pair<int, WeaponBuff> buff_);
 
 
     /** @}*/ /*******************************************************************/
@@ -84,6 +90,9 @@ protected:
 
     /// \brief      Weapon type
     WeaponType      m_type;
+
+    /// \brief                                Weapon temporary beneficial status effect
+    std::pair<int, WeaponBuff>   m_buff;
 
 private:
     /** @}*/ /*******************************************************************/

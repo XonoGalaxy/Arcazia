@@ -24,7 +24,7 @@ void UnitBuilder::reset()
 {
 }
 
-void UnitBuilder::setWeapon(Weapon w_)
+void UnitBuilder::setWeapon(Weapon* w_)
 {
 }
 
@@ -37,5 +37,9 @@ void UnitBuilder::setLifePoint(int life_)
 }
 
 void UnitBuilder::setShieldPoint(int shield_)
+{
+}
+
+void UnitBuilder::setId(int id_)
 {
 }

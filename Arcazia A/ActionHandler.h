@@ -1,8 +1,8 @@
 #pragma once
 /**
 
-    \file       CombatUnit.h
-    \brief      Declaration of CombatUnit class
+    \file       ActionHandler.h
+    \brief      Declaration of ActionHandler class
     \copyright  © Copyright XONO GALAXY - 2023 - All rights reserved
 
     Reproduction, modification and/or use of this document without express written permission of XONO GALAXY is prohibited
@@ -10,129 +10,100 @@
     All rights reserved - XONO GALAXY Proprietary Data.
 
  **/
+#include <random>
 
-#include <vector>
-#include <iostream>
-
-#include "Weapon.h"
 #include "Skills.h"
+#include "CombatUnit.h"
 
-class CombatUnit
+
+class ActionHandler
 {
 public:
     /****************************************************************************/
     /** \name       Types aliases
     **/ /** @{ ******************************************************************/
 
-    enum UnitState { ALIVE = 0, DEAD = 1 };
-    enum UnitAffection { NONE = 0, STUNNED = 1, POISONED = 2 };
-    enum UnitType { KNIGHT = 0, ORC = 1 };
+    enum CombatAction { NO = 0, YES = 1 };
+    enum SkillAction { LAUNCHED = 0, FAILED = 1 };
 
     /** @}*/ /*******************************************************************/
     /** \name       Constructors, destructor
     **/ /** @{ ******************************************************************/
 
     /// \brief      Default constructor
-    CombatUnit();
+    ActionHandler();
 
     /// \brief      Copy constructor
-    //CombatUnit(const CombatUnit& rhs_) = delete;
+    //ActionHandler(const ActionHandler& rhs_) = delete;
 
     /// \brief      Move constructor
-    //CombatUnit(CombatUnit&& rhs_) = delete;
+    //ActionHandler(ActionHandler&& rhs_) = delete;
 
     /// \brief      Assign constructor
-    CombatUnit(int m_life, int m_shield, UnitState m_state);
+    //ActionHandler();
 
     /// \brief      Destructor
-    ~CombatUnit();
+    ~ActionHandler();
 
     /** @}*/ /*******************************************************************/
     /** \name       Operators
     **/ /** @{ ******************************************************************/
 
     /// \brief      Copy operator, use default implementation
-    //CombatUnit& operator=(const CombatUnit& rhs_) = delete;
+    //ActionHandler& operator=(const ActionHandler& rhs_) = delete;
 
     /// \brief      Move operator, use default implementation
-    //CombatUnit& operator=(CombatUnit&& rhs_) = delete;
+    //ActionHandler& operator=(ActionHandler&& rhs_) = delete;
 
     /** @}*/ /*******************************************************************/
     /** \name       Getters, Setters
     **/ /** @{ ******************************************************************/
-
-    /// \brief      Getter : m_life
-    int             getLife() const;
-
-    int             getShield() const;
-
-    Weapon*         getWeapon() const;
-
-    UnitState       getState() const;
-
-    UnitType        getType() const;
-
-    std::vector<Skills>                         getSkills() const;
-
-    std::pair<int, UnitAffection>  getAffection() const;
-
-    int             getId() const;
-
-
-    /// \brief      Setter : m_life
-    void            setLife(int life_);
-
-    void            setShield(int shield_);
-
-    void            setWeapon(Weapon* weapon_);
-
-    void            setState(UnitState state_);
-
-    void            setType(UnitType type_);
-
-    void            setSkills(Skills skill_);
-
-    void            setAffection(std::pair<int,UnitAffection> affection_);
-
-    void            setId(int id_);
 
 
     /** @}*/ /*******************************************************************/
     /** \name       Methods, Functions
     **/ /** @{ ******************************************************************/
 
+    /// \brief          Check if skill action is possible
+    CombatAction        checkSkillAction(CombatUnit* unit_);
+
+    /// \brief          Check if basic attack action is possible
+    CombatAction        checkBasicAttackAction(CombatUnit* unit_);
+
+    /// \brief                           Check units state
+    CombatUnit::UnitState                checkUnitsDeath(std::vector<CombatUnit*> units_);
+
+    /// \brief          Update units state
+    void                updateUnitsState(std::vector<CombatUnit*> units_);
+
+    /// \brief          Update units affections effect turns
+    void                updateAffections(std::vector<CombatUnit*> units_);
+
+    /// \brief          Update units skills 
+    void                updateSkills(std::vector<CombatUnit*> units_);
+
+    void                updateWeaponsBuffs(std::vector<CombatUnit*> units_);
+
+    /// \brief          Unit launch a skill
+    SkillAction         launchSkill(CombatUnit* unit_);
+
+    /// \brief          Launcher unit applies skill on receiver unit
+    void                applySkill(CombatUnit* launcher_, CombatUnit* receiver_);
+
+    /// \brief          Launcher unit applies basic attack on receiver unit 
+    void                applyBasicAttack(CombatUnit* launcher_, CombatUnit* receiver_);
+
 protected:
     /** @}*/ /*******************************************************************/
     /** \name       Protected Methods, Functions
     **/ /** @{ ******************************************************************/
 
+
     /** @}*/ /*******************************************************************/
     /** \name       Protected Data members
     **/ /** @{ ******************************************************************/
 
-    /// \brief      Unit identification umber
-    int             m_id;
 
-    /// \brief      Life point
-    int             m_life;
-
-    /// \brief      Shield point
-    int             m_shield;
-
-    /// \brief      Weapon
-    Weapon*         m_weapon;
-
-    /// \brief      Combat unit state
-    UnitState       m_state;
-
-    /// \brief      Combat unit type
-    UnitType        m_type;
-
-    /// \brief                     Combat unit skills
-    std::vector<Skills>            m_skills;
-
-    /// \brief                     Combat unit affection associated with number turns that effect lasts
-    std::pair<int,UnitAffection>   m_affection;
 
 private:
     /** @}*/ /*******************************************************************/
@@ -141,8 +112,9 @@ private:
 
 
     /** @}*/ /*******************************************************************/
-    /** \name       Private Data members
+    /** \name       Private Data memberss
     **/ /** @{ ******************************************************************/
+
 
     /** @} **/
 };

@@ -26,7 +26,7 @@ void OrcBuilder::reset()
 	this->m_orc = new Orc();
 }
 
-void OrcBuilder::setWeapon(Weapon w_)
+void OrcBuilder::setWeapon(Weapon* w_)
 {
 	m_orc->setWeapon(w_);
 }
@@ -44,6 +44,11 @@ void OrcBuilder::setLifePoint(int life_)
 void OrcBuilder::setShieldPoint(int shield_)
 {
 	m_orc->setShield(shield_);
+}
+
+void OrcBuilder::setId(int id_)
+{
+	m_orc->setId(id_);
 }
 
 Orc* OrcBuilder::getOrc()
