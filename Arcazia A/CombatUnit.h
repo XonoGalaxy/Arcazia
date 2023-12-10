@@ -74,7 +74,7 @@ public:
 
     std::vector<Skills>                         getSkills() const;
 
-    std::vector<std::pair<int, UnitAffection>>  getAffection() const;
+    std::pair<int, UnitAffection>  getAffection() const;
 
     int             getId() const;
 
@@ -128,11 +128,11 @@ protected:
     /// \brief      Combat unit type
     UnitType        m_type;
 
-    /// \brief                                  Combat unit skills
-    std::vector<Skills>                         m_skills;
+    /// \brief                     Combat unit skills
+    std::vector<Skills>            m_skills;
 
-    /// \brief                                  Combat unit affection associated with number turns that effect lasts
-    std::vector<std::pair<int,UnitAffection>>   m_affections;
+    /// \brief                     Combat unit affection associated with number turns that effect lasts
+    std::pair<int,UnitAffection>   m_affection;
 
 private:
     /** @}*/ /*******************************************************************/

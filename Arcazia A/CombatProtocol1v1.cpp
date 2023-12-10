@@ -113,7 +113,7 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
         if (m_actionHandler->checkUnitsDeath(m_opponents) == CombatUnit::UnitState::DEAD) {
 
             m_state = CombatState::ENDED;
-            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat Protocol 1v1 with Unit" << m_opponents.at(0)->getId() << " vs " << m_opponents.at(1)->getId() << " finished\n";
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Combat Protocol 1v1 with Unit " << m_opponents.at(0)->getId() << " vs " << m_opponents.at(1)->getId() << " finished\n";
 
             // Look for the survivor which is the winner
             for (auto& unit : m_opponents) {
@@ -121,6 +121,7 @@ void CombatProtocol1v1::launchCombatProtocol1v1()
                     std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : The winner is Unit " << unit->getId() <<  "!\n";
                 }
             }
+            break;
         }
 
         else {

@@ -24,28 +24,17 @@ ActionHandler::CombatAction ActionHandler::checkSkillAction(CombatUnit* unit_)
 {
     if (unit_->getSkills().at(0).getState() == Skills::SkillState::READY) {
 
-        // Check if unit has affection
-        if (unit_->getAffection().empty()) {
-            // No affaction then action possible
-            return ActionHandler::CombatAction::YES;
+        if (unit_->getAffection().second == CombatUnit::UnitAffection::STUNNED) {
+        
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is stunned and can't launch a skill\n";
+            return ActionHandler::CombatAction::NO;
+        
         }
         else {
-
-            for (auto& affection : unit_->getAffection()) {
-                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | DEBUG : I AM HERE\n";
-                if (affection.second == CombatUnit::UnitAffection::STUNNED) {
-
-                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is stunned and can't launch a skill\n";
-                    return ActionHandler::CombatAction::NO;
-
-                }
-                else {
-
-                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is able to launch a skill\n";
-                    return ActionHandler::CombatAction::YES;
-
-                }
-            }
+        
+            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is able to launch a skill\n";
+            return ActionHandler::CombatAction::YES;
+        
         }
     }
     else {
@@ -55,25 +44,17 @@ ActionHandler::CombatAction ActionHandler::checkSkillAction(CombatUnit* unit_)
 
 ActionHandler::CombatAction ActionHandler::checkBasicAttackAction(CombatUnit* unit_)
 {
-        // Check if unit has affection
-        if (unit_->getAffection().empty()) {
 
-            // No affaction then action possible
-            return ActionHandler::CombatAction::YES;
-        }
+    if (unit_->getAffection().second == CombatUnit::UnitAffection::STUNNED) {
 
-    for (auto& affection : unit_->getAffection()) {
-        if (affection.second == CombatUnit::UnitAffection::STUNNED) {
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is stunned and can't launch a basic attack\n";
+        return ActionHandler::CombatAction::NO;
 
-            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is stunned and can't launch a basic attack\n";
-            return ActionHandler::CombatAction::NO;
-           
-        }
-        else {
+    }
+    else {
 
-            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is able to launch a basic attack\n";
-            return ActionHandler::CombatAction::YES;
-        }
+        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit_->getId() << " is able to launch a basic attack\n";
+        return ActionHandler::CombatAction::YES;
     }
 }
 
@@ -118,34 +99,70 @@ void ActionHandler::updateUnitsState(std::vector<CombatUnit*> units_)
 
 void ActionHandler::updateAffections(std::vector<CombatUnit*> units_)
 {
+    std::pair<int, CombatUnit::UnitAffection> tmp;
 
     for (auto& unit : units_) {
 
-        // Check if unit has affection
-        if (unit->getAffection().empty()) {
+        if (unit->getAffection().first != 0) {
 
-            std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " has no affection\n";
-            // No update possible
-        }
-        else {
+            tmp = unit->getAffection();
+            tmp.first--;
 
-            std::vector<std::pair<int, CombatUnit::UnitAffection>>::iterator it;
+            if (tmp.first == 0) {
 
-            for (it = unit->getAffection().begin(); it != unit->getAffection().end(); it++) {
-                if (it->first == 0) {
-                    unit->getAffection().erase(it);
-                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is not more affected by : " << it->second << "\n";
+                if (tmp.second == CombatUnit::UnitAffection::STUNNED) {
+
+                    // Reset stun effect on unit 
+                    tmp.second = CombatUnit::UnitAffection::NONE;
+                    unit->setAffection(tmp);
+
+                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is no more stunned\n";
+
                 }
-                else if (it->first != 0) {
-                    it->first = it->first--;
-                    std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is affected by : " << it->second << " within : " << it->first << " turns remaining \n";
+                else {
+                    //Do nothing
                 }
             }
+            else {
+                // Do nothing
 
+            }
+        }
+        else {
+            //Do nothing
         }
     }
 
-    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units affections turns effect \n";
+    std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units weapon buffs \n";
+
+
+    //for (auto& unit : units_) {
+
+    //    // Check if unit has affection
+    //    if (unit->getAffection().empty()) {
+
+    //        std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " has no affection\n";
+    //        // No update possible
+    //    }
+    //    else {
+
+    //        std::vector<std::pair<int, CombatUnit::UnitAffection>>::iterator it;
+
+    //        for (it = unit->getAffection().begin(); it != unit->getAffection().end(); it++) {
+    //            if (it->first == 0) {
+    //                unit->getAffection().erase(it);
+    //                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is not more affected by : " << it->second << "\n";
+    //            }
+    //            else if (it->first != 0) {
+    //                it->first = it->first--;
+    //                std::cout << "LOG : GAME MOTOR | COMBAT SYSTEM | INFO : Unit " << unit->getId() << " is affected by : " << it->second << " within : " << it->first << " turns remaining \n";
+    //            }
+    //        }
+
+    //    }
+    //}
+
+    //std::cout << "LOG : GAME MOTOR | UNIT SYSTEM | INFO : Updated units affections turns effect \n";
 }
 
 void ActionHandler::updateSkills(std::vector<CombatUnit*> units_)

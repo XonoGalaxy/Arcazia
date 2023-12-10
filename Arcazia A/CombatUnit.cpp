@@ -60,9 +60,9 @@ std::vector<Skills> CombatUnit::getSkills() const
     return m_skills;
 }
 
-std::vector<std::pair<int,CombatUnit::UnitAffection>> CombatUnit::getAffection() const
+std::pair<int,CombatUnit::UnitAffection> CombatUnit::getAffection() const
 {
-    return m_affections;
+    return m_affection;
 }
 
 int CombatUnit::getId() const
@@ -102,8 +102,7 @@ void CombatUnit::setSkills(Skills skill_)
 
 void CombatUnit::setAffection(std::pair<int, UnitAffection> affection_)
 {
-    // Adding a pair to the vector
-    m_affections.push_back(affection_);
+    m_affection = affection_;
 }
 
 void CombatUnit::setId(int id_)
